@@ -1,4 +1,8 @@
 # Useless Machine
+# purp: to unpress a lever with a mechanical, motor-powered arm whenever the user presses it
+# last updated: by J.F on July 13, '16 to add comments
+# created by: Juliana Furgala
+
 from ev3dev import *
 import ev3dev.ev3 as ev3
 import time
