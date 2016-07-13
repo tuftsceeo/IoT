@@ -1,0 +1,9 @@
+Setting up an ev3 with linux opens up many new features on the ev3 but you'll probably find that many of the terminal commands, libraries, and packages you want have to be installed. This makes sense as it's the way linux likes to work but that doesn't means it's quick or simple to find the right terminal commands. So here is a walkthrough.
+
+1. Gather the following supplies/materials: 
+  - an Ev3 kit with an Ev3 brick and sensors
+  - a microSD chip with at least 8(?)GB space (16GB+ ensures you shouldn't run out of space quickly when you update your linux system and install new library packages)
+  - a WIFI dongle (Canakit's WIFI dongle is supposed to work wonderfully with Linux systems - https://www.amazon.com/CanaKit-Raspberry-Wireless-Adapter-Dongle/dp/B00GFAN498); 
+  
+2. Next, download the ev3dev ev3 linux system. It is Debian-based and has language bindings for Node.js, C++ and Python so you can program in all three or in any of those of your choice. For this walkthrough, I will be using Python. 
+
