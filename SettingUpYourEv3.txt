@@ -69,5 +69,9 @@ This can be removed and plugged in with your ev3 on.
     sudo apt-get install apt-utils
     sudo apt-get install curl
     sudo curl https://bootstrap.pypa.io/get-pip.py | python
-  
-  
+
+Some other potentially helpful packages are below:
+  sudo apt-get install locate (Allows you to 'find' any package you have installed or know if one is not installed)
+
+A recent, thorough list of functions for this system can be found here:
+  https://media.readthedocs.org/pdf/python-ev3dev/latest/python-ev3dev.pdf
