@@ -5,3 +5,5 @@
 3. Make an interpreter for other languages to Python (so a program generates its own InterpretCommand function containing 
   all desired if... then... statements)
   - Must at least work for JSON
+4. Add to Google sites 
+  - Where? On Dan's page or another page??
