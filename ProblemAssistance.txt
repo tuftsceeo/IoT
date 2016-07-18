@@ -1,0 +1,7 @@
+If you find that you are coming across a problem, check here. I tried to collect all problems I encountered and how I resolved them.
+If you come across a new problem and a solution let me know and I can add it here.
+
+1. The terminal is saying my system time is incorrect. (can cause openSSH and certificate issues)
+  A: Try resetting the system time and date to be local as it might have stopped for whatever reason and is out of date.
+  You will need to use the command 'dpkg-reconfigure tzdata' . If the package dpkg-reconfigure is not found you will need to download it
+  first. Type 'sudo apt-get install debconf' then the above command.
