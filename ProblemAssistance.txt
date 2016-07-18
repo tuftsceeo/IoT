@@ -3,5 +3,8 @@ If you come across a new problem and a solution let me know and I can add it her
 
 1. The terminal is saying my system time is incorrect. (can cause openSSH and certificate issues)
   A: Try resetting the system time and date to be local as it might have stopped for whatever reason and is out of date.
-  You will need to use the command 'dpkg-reconfigure tzdata' . If the package dpkg-reconfigure is not found you will need to download it
-  first. Type 'sudo apt-get install debconf' then the above command.
+  You will need to use the command 'sudo dpkg-reconfigure tzdata' . If the package dpkg-reconfigure is not found you will need 
+  download it first. Type 'sudo apt-get install debconf' then the above command.
+  
+  If that doesn't fix the time, follow the instructions on this page: 
+    https://abdussamad.com/archives/620-Debian-Linux:-Setting-the-timezone-and-synchronizing-time-with-NTP.html
