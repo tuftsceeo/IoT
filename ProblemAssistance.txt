@@ -7,4 +7,6 @@ If you come across a new problem and a solution let me know and I can add it her
   download it first. Type 'sudo apt-get install debconf' then the above command.
   
   If that doesn't fix the time, follow the instructions on this page: 
-    https://abdussamad.com/archives/620-Debian-Linux:-Setting-the-timezone-and-synchronizing-time-with-NTP.html
+    https://wiki.debian.org/DateTime (Thank you, Caleb!)
+    See this page for more information:
+    https://www.debian.org/doc/manuals/system-administrator/ch-sysadmin-time.html
