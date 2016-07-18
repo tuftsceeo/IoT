@@ -1,4 +1,7 @@
 1. Connect Dan's front end interface to my back end code
+  - Also work on socket server (JSON?) to connect multiple ev3s
 2. Connect IFTTT's front end interface to my back end code
-3. Make an interpreter for other languages to Python (so a program generates its own InterpretCommand function containing all 
-  desired if... then... statements)
+  - Need interpreter
+3. Make an interpreter for other languages to Python (so a program generates its own InterpretCommand function containing 
+  all desired if... then... statements)
+  - Must at least work for JSON
