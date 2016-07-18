@@ -75,3 +75,8 @@ Some other potentially helpful packages are below:
 
 A recent, thorough list of functions for this system can be found here:
   https://media.readthedocs.org/pdf/python-ev3dev/latest/python-ev3dev.pdf
+
+If you use vim to edit you are all set but if you use emacs you will have to install it. Use the following command to install emacs:
+  sudo apt-get install emacs
+  
+  From: http://www.thegeekstuff.com/2010/07/install-emacs-editor-on-linux/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+TheGeekStuff+(The+Geek+Stuff)
