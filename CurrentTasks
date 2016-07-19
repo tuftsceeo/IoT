@@ -11,8 +11,19 @@
   all desired if... then... statements)
   - Must at least work for JSON
   - Status: Researching, need self-writing code program that interprets another language and then writes a function in Python
-4. Add to Google sites (◑)
-  - Where? On Dan's page or another page??
-  - Status: Have write-up and planning on filming demo next time; need to figure out where to put it
+4. Add to Google sites (☑)
+  - Status: Put up a page and filled it out with current summary and information
 5. Make a package list for classrooms. (☑)
   - Status: Prelim.; up for changes as suggested; should be nearly complete if not completely so
+
+
+Long-Term IoT Goals
+ - Make a web interface that people can use to select options (which creates a program for you) and which sends it automatically to your
+ EV3 (goal = user friendly, no SSH knowledge required)
+ 
+ - Make a python back-end for ev3dev system so people can program directly in python and have it 'translated' to ev3dev functions, 
+ variables, etc.
+ 
+ - Remove SSHing and the terminal from user view
+ 
+ - Digital daisy-chain of EV3s
