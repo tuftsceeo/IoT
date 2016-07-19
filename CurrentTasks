@@ -3,7 +3,7 @@
 Summer goals
 1. Connect Dan's front end interface to my back end code (○)
   - Also work on socket server (JSON?) to connect multiple ev3s
-  - Status: Will start tomorrow
+  - Status: Have to look into socket server
 2. Connect IFTTT's front end interface to my back end code (◑)
   - Need interpreter
   - Status: Based on decisions from IFTTT group; when both sides meet in middle; front end still in development
