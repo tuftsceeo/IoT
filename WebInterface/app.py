@@ -1,3 +1,8 @@
+# app.py
+# purp: to create a basic user-responsive, EV3-hosted web server that can interpret user form input
+# last updated: by J.F on July 25, '16 to add comments
+# created by: Juliana Furgala
+
 # tutorial for set-up found here: https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
 from flask import Flask, render_template, request
 from ev3dev.auto import *
