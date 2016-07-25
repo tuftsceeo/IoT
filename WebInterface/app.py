@@ -13,16 +13,17 @@ app = Flask(__name__)
 @app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == "POST":
+        print("Command received")
         if request.form['direction']=='forward':
             m.run_forever(duty_cycle_sp = 40)
-        print("Command received")
         if request.form['direction']=='backward':
             m.run_forever(duty_cycle_sp = -40)
         print(request.form['direction'])
         if request.form['direction']=='stop':
             m.stop()
         if ts1.value() == True:
-            m.run_timed(time_sp = 1000, duty_cycle_sp = 75)    
+            m.run_timed(time_sp = 1000, duty_cycle_sp = 75)   
+        print("Command processed")
         return render_template('index.html')
 
     elif request.method == "GET":
