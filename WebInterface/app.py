@@ -21,8 +21,6 @@ def index():
         print(request.form['direction'])
         if request.form['direction']=='stop':
             m.stop()
-        if ts1.value() == True:
-            m.run_timed(time_sp = 1000, duty_cycle_sp = 75)   
         print("Command processed")
         return render_template('index.html')
 
