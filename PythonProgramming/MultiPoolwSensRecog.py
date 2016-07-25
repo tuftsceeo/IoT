@@ -1,4 +1,8 @@
-# Useless Machine Multi-Threading
+# Useless Machine Multiprocessing with Sensor Recognition
+# purp: to unpress a lever with a mechanical, motor-powered arm whenever the user presses it; includes sensor detection 
+#   and autopopulation of a list of sensors to check
+# last updated: by J.F on July 25, '16 to add comments
+# created by: Juliana Furgala
 
 from ev3dev import *
 import ev3dev.ev3 as ev3
