@@ -1,4 +1,4 @@
-# Useless Machine Multi-Threading
+# Useless Machine Multi-Processing
 # purp: to unpress a lever with a mechanical, motor-powered arm whenever the user presses it; uses pool from multiprocessing library
 # last updated: by J.F on July 13, '16 to add comments
 # created by: Juliana Furgala
