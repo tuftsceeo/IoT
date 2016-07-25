@@ -1,4 +1,7 @@
-# Useless Machine Multi-Threading
+# TwitterBot.py
+# purp: to send a user-input tweet whenever the user presses a touch sensor (in port '1')
+# last updated: by J.F on July 25, '16 to add comments
+# created by: Juliana Furgala
 
 from ev3dev import *
 import ev3dev.ev3 as ev3
