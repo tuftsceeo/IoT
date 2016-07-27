@@ -5,27 +5,26 @@ Setting up an ev3 with linux opens up many new features on the ev3 but you'll pr
 libraries, and packages you want have to be installed. This makes sense as it's the way linux likes to work but that doesn't mean 
 it's quick or simple to find the right terminal commands. So here is a walkthrough.
 
-1. Gather the following supplies/materials: 
+1. **Gather the following supplies/materials:** 
   - an Ev3 kit with an Ev3 brick and sensors
   - a microSD chip with at least 8(?)GB space (16GB+ ensures you shouldn't run out of space quickly when you update your linux system 
   and install new library packages)
   - a WIFI dongle (Canakit's WIFI dongle is supposed to work wonderfully with Linux systems - 
   https://www.amazon.com/CanaKit-Raspberry-Wireless-Adapter-Dongle/dp/B00GFAN498); 
   
-2. Next, download the ev3dev ev3 linux system. It is Debian-based and has language bindings for Node.js, C++ and Python so you can 
+2. **Next, download the ev3dev ev3 linux system.** It is Debian-based and has language bindings for Node.js, C++ and Python so you can 
 program in all three or in any of those of your choice. For this walkthrough, I will be using Python. Here is the github 
 link: https://github.com/ev3dev/ev3dev/releases . Find the most current ev3dev Jessie linux version (at the time of this writing, 
 the most current released version is ev3dev-jessie-2015-12-30). Download the first ZIP file, open and transfer the contents onto 
 the microSD card. 
 
-3. Have your ev3 turned off. Now plug the microSD card into the SD card slot on the side of your ev3. Try turning on your ev3. When 
+3. **Have your ev3 turned off. Now plug the microSD card into the SD card slot** on the side of your ev3. Try turning on your ev3. When
 your ev3 boots, it should now be running Jessie (linux) and Monobrick. Note that the interface will look different from the default 
 LEGO interface. As well, the battery in the corner will not tell you a percentage. Rather it is a general range. You should keep an 
 eye out for when the battery reaches 6.##. This means it will die soon (when it reaches 5 and it does so fairly quickly). A full 
 battery should be around 8.##.
 
-4. Plug in your WIFI dongle into the USB slot on the side of the brick to add WIFI searching and connecting capabilities to your brick.
-This can be removed and plugged in with your ev3 on.
+4. **Plug in your WIFI dongle into the USB slot** on the side of the brick to add WIFI searching and connecting capabilities to your brick. This can be removed and plugged in with your ev3 on.
 
   Now for a few notes about the interface:
   
@@ -45,8 +44,8 @@ This can be removed and plugged in with your ev3 on.
     4. You probably won't end up using Roberta Lab. That was a new feature added as of the most recent major update on the os system 
     and I haven't looked into its abilities. If you do, let me know and we can update this point.
 
-5. Update, Upgrade
-  Once you've installed the system you'll want to update and upgrade all packages on your os system that have newer versions. You 
+5. **Update, Upgrade**
+    Once you've installed the system you'll want to update and upgrade all packages on your os system that have newer versions. You 
   should do this every time you want to install a library or other package to make sure that you can use all newer packages. To 
   download anything or update/upgrade anything your brick must be connected to a WIFI network.
   
