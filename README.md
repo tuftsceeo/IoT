@@ -1,4 +1,6 @@
 First Time?
+--------------
+
 Setting up an ev3 with linux opens up many new features on the ev3 but you'll probably find that many of the terminal commands, 
 libraries, and packages you want have to be installed. This makes sense as it's the way linux likes to work but that doesn't mean 
 it's quick or simple to find the right terminal commands. So here is a walkthrough.
