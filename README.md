@@ -1,20 +1,20 @@
 First Time?
 --------------
 
-Setting up an EV3 with linux opens up many new features on the ev3 but you'll probably find that many of the terminal commands, 
+Setting up an EV3 with Linux opens up many new features on the ev3 but you'll probably find that many of the terminal commands, 
 libraries, and packages you want have to be installed. This makes sense as it's the way Linux likes to work but that doesn't mean 
 it's quick or simple to find the right terminal commands. So here is a walkthrough.
 
 1. **Gather the following supplies/materials:** 
   - an EV3 kit with an EV3 brick and sensors
-  - a microSD chip with at least 8(?)GB space (16GB+ ensures you shouldn't run out of space quickly when you update your linux system 
+  - a microSD chip with at least 8(?)GB space (16GB+ ensures you shouldn't run out of space quickly when you update your Linux system 
   and install new library packages)
   - a WIFI dongle (Canakit's WIFI dongle is supposed to work wonderfully with Linux systems - 
   https://www.amazon.com/CanaKit-Raspberry-Wireless-Adapter-Dongle/dp/B00GFAN498); 
   
 2. **Next, download the ev3dev ev3 linux system.** It is Debian-based and has language bindings for Node.js, C++ and Python so you can 
 program in all three or in any of those of your choice. For this walkthrough, I will be using Python. Here is the github 
-link: https://github.com/ev3dev/ev3dev/releases . Find the most current ev3dev Jessie linux version (at the time of this writing, 
+link: https://github.com/ev3dev/ev3dev/releases . Find the most current ev3dev Jessie Linux version (at the time of this writing, 
 the most current released version is ev3dev-jessie-2015-12-30). Download the first ZIP file, open and transfer the contents onto 
 the microSD card. 
 
@@ -34,7 +34,7 @@ battery should be around 8.##.
     
     2. 'Device Browser' is your second option. This lets you choose to see ports, sensors, and motors by category and look at all 
     objects of those kinds currently active (as in plugged in) on the brick. If you select a specific sensor or motor, you can track 
-    its current value from the ev3 brick window, as well as its port/address and its name.
+    its current value from the EV3 brick window, as well as its port/address and its name.
     
     3. 'Wireless and Networks' is self-explanatory. You can click the category of connection you want (Bluetooth, Wi-Fi) and select 
     another device or network. You can have both a WIFI and a Bluetooth connection at the same time but Bluetooth supposedly drains
