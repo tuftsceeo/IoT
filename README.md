@@ -1,12 +1,12 @@
 First Time?
 --------------
 
-Setting up an ev3 with linux opens up many new features on the ev3 but you'll probably find that many of the terminal commands, 
-libraries, and packages you want have to be installed. This makes sense as it's the way linux likes to work but that doesn't mean 
+Setting up an EV3 with linux opens up many new features on the ev3 but you'll probably find that many of the terminal commands, 
+libraries, and packages you want have to be installed. This makes sense as it's the way Linux likes to work but that doesn't mean 
 it's quick or simple to find the right terminal commands. So here is a walkthrough.
 
 1. **Gather the following supplies/materials:** 
-  - an Ev3 kit with an Ev3 brick and sensors
+  - an EV3 kit with an EV3 brick and sensors
   - a microSD chip with at least 8(?)GB space (16GB+ ensures you shouldn't run out of space quickly when you update your linux system 
   and install new library packages)
   - a WIFI dongle (Canakit's WIFI dongle is supposed to work wonderfully with Linux systems - 
@@ -18,7 +18,7 @@ link: https://github.com/ev3dev/ev3dev/releases . Find the most current ev3dev J
 the most current released version is ev3dev-jessie-2015-12-30). Download the first ZIP file, open and transfer the contents onto 
 the microSD card. 
 
-3. **Have your ev3 turned off. Now plug the microSD card into the SD card slot** on the side of your ev3. Try turning on your ev3. When
+3. **Have your EV3 turned off. Now plug the microSD card into the SD card slot** on the side of your ev3. Try turning on your ev3. When
 your ev3 boots, it should now be running Jessie (linux) and Monobrick. Note that the interface will look different from the default 
 LEGO interface. As well, the battery in the corner will not tell you a percentage. Rather it is a general range. You should keep an 
 eye out for when the battery reaches 6.##. This means it will die soon (when it reaches 5 and it does so fairly quickly). A full 
