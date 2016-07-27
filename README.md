@@ -12,7 +12,7 @@ it's quick or simple to find the right terminal commands. So here is a walkthrou
   - a WIFI dongle (Canakit's WIFI dongle is supposed to work wonderfully with Linux systems - 
   https://www.amazon.com/CanaKit-Raspberry-Wireless-Adapter-Dongle/dp/B00GFAN498); 
   
-2. **Next, download the ev3dev ev3 linux system.** It is Debian-based and has language bindings for Node.js, C++ and Python so you can 
+2. **Next, download the ev3dev EV3 Linux system.** It is Debian-based and has language bindings for Node.js, C++ and Python so you can 
 program in all three or in any of those of your choice. For this walkthrough, I will be using Python. Here is the github 
 link: https://github.com/ev3dev/ev3dev/releases . Find the most current ev3dev Jessie Linux version (at the time of this writing, 
 the most current released version is ev3dev-jessie-2015-12-30). Download the first ZIP file, open and transfer the contents onto 
@@ -53,10 +53,10 @@ battery should be around 8.##.
   upgrade.
   
   To update type in the following line in your terminal:
-    sudo apt-get update
+  - sudo apt-get update
   
   Now type this line to upgrade:
-    sudo apt-get upgrade
+  - sudo apt-get upgrade
   
   This usually takes at least two hours for the first upgrade and will take longer the older your system is compared to the newest 
   version. You may have to run this upgrade command multiple times (and it's a good idea to) until there is nothing left to update. 
@@ -68,18 +68,18 @@ battery should be around 8.##.
   Please type these in order as some downloads depend on the earlier ones. (sudo gives you 'super-user' access to download which you 
   can't always do as a regular user)
   
-    sudo apt-get install apt-utils
-    sudo apt-get install curl
-    sudo curl https://bootstrap.pypa.io/get-pip.py | python
+  - sudo apt-get install apt-utils
+  - sudo apt-get install curl
+  - sudo curl https://bootstrap.pypa.io/get-pip.py | python
 
 Some other potentially helpful packages are below:
-  sudo apt-get install locate (Allows you to 'find' any package you have installed or know if one is not installed)
+  - sudo apt-get install locate (Allows you to 'find' any package you have installed or know if one is not installed)
 
 A recent, thorough list of functions for this system can be found here:
   https://media.readthedocs.org/pdf/python-ev3dev/latest/python-ev3dev.pdf
 
 If you use vim to edit you are all set but if you use emacs you will have to install it. Use the following command to install emacs:
-  sudo apt-get install emacs
+  - sudo apt-get install emacs
   
   Emacs is a pretty big download (289 mB) so it will take a while.
   From: http://www.thegeekstuff.com/2010/07/install-emacs-editor-on-linux/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+TheGeekStuff+(The+Geek+Stuff)
