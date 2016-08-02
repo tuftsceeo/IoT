@@ -11,10 +11,15 @@ PYTHONIOENCODING = 'utf-8'
 # ts = ev3.TouchSensor('in1')
 
 app = Flask(__name__)
+# basic logging, tells you when you have received a request ('GET'/'POST', etc.)
 logging.basicConfig(level=logging.INFO)
 
+# advanced debugging log, to use, uncomment line below
 # logging.getLogger('flask_cors').level = logging.DEBUG
 
+# resources = what pages you want to have access allowed to, can be 1 page, in this case is '/' (home page)
+# origin = the list of allowed IP addresses to connect, your own is already allowed
+# methods = what can the user/person do to the page(s)
 CORS(app, resources=r'/*', origin="http://130.64.94.22:8888/", methods=["GET", "POST"])
 
 
