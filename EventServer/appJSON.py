@@ -5,7 +5,7 @@ from ev3dev import *
 import ev3dev.ev3 as ev3
 import logging, time
 
-PYTHONIOENCODING = 'utf-8'
+PYTHONIOENCODING = 'utf-8'  # set the language to standard English characters (in case your system isn't)
 
 # m = ev3.LargeMotor('outA')
 # ts = ev3.TouchSensor('in1')
@@ -57,8 +57,10 @@ def process_command(data):
             set_lm(data['port'], data['info'], data['value'])
         return "successful set"
     return result
+    
 
-
+# get_touch
+#   purp: to return the current value from a touch sensor
 def get_touch(port, info):
     try:
         if info == 'value':
@@ -67,6 +69,8 @@ def get_touch(port, info):
         return "Not found"
 
 
+# get_lm
+#   purp: to return a value/stat from a large motor
 def get_lm(port, info):
     try:
         if info == 'position':
@@ -75,6 +79,8 @@ def get_lm(port, info):
         return "Not found"
 
 
+# set_lm
+#   purp: to run a function for a large motor with a given value
 def set_lm(port, info, value):
     try:
         i = ev3.LargeMotor(port)
