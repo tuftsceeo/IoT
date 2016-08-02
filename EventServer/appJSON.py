@@ -87,7 +87,7 @@ def set_lm(port, info, value):
         power = int(value)
         if info == 'run_forever':
             i.run_forever(duty_cycle_sp=power)
-            time.wait(1)
+            time.wait(1)  # this will cause an error but still run; it's a work-around for the ftn not working correctly; ignorable
             # i.run_timed(time_sp = 1000000000, duty_cycle_sp = value)
         if info == 'stop':
             i.stop()
@@ -97,6 +97,8 @@ def set_lm(port, info, value):
         return "Not found"
 
 
+# needs to be fixed; wants to JSON parse...
+# To be: a page that takes in form data and responds
 @app.route('/1', methods=["GET", "POST"])
 def index1():
     if request.method == "POST":
@@ -113,13 +115,15 @@ def index1():
         return render_template('index.html')
 
 
-@app.errorhandler(400)
+# error handling -
+
+@app.errorhandler(400) # client-side error; something wrong with the browser
 def client_error(error):
     app.logger.error('Client Error: %s', error)
     return ('{httpCode: %s}', error)
 
 
-@app.errorhandler(500)
+@app.errorhandler(500) # server error; something wrong with the brick's server
 def internal_server_error(error):
     app.logger.error('Server Error: %s', error)
     return ('{httpCode: %s}', error)
