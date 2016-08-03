@@ -62,7 +62,7 @@ you see 'MAC address' followed by a combination of letters and numbers like this
 
   To do anything with your brick, you must ssh into your brick with the following information.
   - Username: robot
-  - Password: maker
+  - Password: maker (This is also the password you will need for using 'sudo'.)
   
   Or in other words, open a termina window, type 'ssh robot@yourRobot'sIP' and when prompted for a password, type 'maker', then press
   the Enter key. Your password will likely not show up on your terminal screen for security reasons but it is still there if you've
