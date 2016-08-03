@@ -29,8 +29,8 @@ battery should be around 8.##.
   Now for a few notes about the interface:
   
     1. The first line should say 'File Browser.' This will allow you to click through the files stored on your ev3. Note: This is not 
-    ALL files (not from root). It's all files and folders in your 'home' directory and beyond. As of now you can't run a program from 
-    clicking on it on the brick. You have to give a terminal command. That's one feature I was going to look at implementing for ease.
+    ALL files (not from root). It's all files and folders in your 'home' directory and beyond. You can run a program from 
+    clicking on it on the brick. But it's a bit finicky so I recommend that you instead use a terminal command.
     
     2. 'Device Browser' is your second option. This lets you choose to see ports, sensors, and motors by category and look at all 
     objects of those kinds currently active (as in plugged in) on the brick. If you select a specific sensor or motor, you can track 
