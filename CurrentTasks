@@ -1,20 +1,21 @@
 ○ , ● , ◐ , ◑ , ◒ , ◓ , ◔ , ◕ , ☑ - Completion circles
 
 Summer goals
-1. Connect Dan's front end interface to my back end code (○)
+1. Connect Dan's front end interface to my back end code (◐) - Dan connected to my EV3 with his updated code; not with my back end code though
   - Also work on socket server (JSON?) to connect multiple ev3s
   - Status: Have to look into socket server
-2. Connect IFTTT's front end interface to my back end code (◑)
-  - Need interpreter
-  - Status: Based on decisions from IFTTT group; when both sides meet in middle; front end still in development
-3. Start on/Make an interpreter for other languages to Python (○)
-  (so a program generates its own InterpretCommand function containing 
-  all desired if... then... statements)
+2. Connect IFTTT's front end interface to my back end code (☑ )
+  - Need interpreter - ☑ 
+  - Status: almost complete and interface is soon to be linked to the smart browser/server Ben has running
+3. Start on/Make an interpreter for other languages to Python (☑ ) (By Ben on his browser's side; to make smart brick, just move 
+code over to run on EV3) 
+  - Idea: program generates its own InterpretCommand function containing all desired if... then... statements
   - Must at least work for JSON
-  - To receive the JSON data, need to make a socket server
-  - Status: Researching, need self-writing code program that interprets another language and then writes a function in Python
+  - To receive the JSON data, need to make a socket server - X INSTEAD used flask so ☑ 
+  - Status: Researching, need self-writing code program that interprets another language and then writes a function in Python - X NO NEED
 4. Add to Google sites (☑)
   - Status: Put up a page and filled it out with current summary and information
+  - NEED TO UPDATE
 5. Make a package list for classrooms. (☑)
   - Status: Prelim.; up for changes as suggested; should be nearly complete if not completely so
 
