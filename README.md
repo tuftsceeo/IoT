@@ -46,6 +46,8 @@ battery should be around 8.##.
     4. You probably won't end up using Roberta Lab. That was a new feature added as of the most recent major update on the os system 
     and I haven't looked into its abilities. If you do, let me know and we can update this point.
 
+To progress further, you will need a internet connection. If your network requires device approval you must provide the appropriate information (like MAC address) to your wireless network.
+
 5. **Update, Upgrade**
     Once you've installed the system you'll want to update and upgrade all packages on your os system that have newer versions. You 
   should do this every time you want to install a library or other package to make sure that you can use all newer packages. To 
