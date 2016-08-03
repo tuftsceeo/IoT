@@ -1,0 +1,7 @@
+Required Materials and Supplies
+  - 1 EV3 kit with an EV3 brick, sensors, and motors (presumed to have)
+  - 1 Canakit WIFI dongle
+  - 1 router
+  - 1 64 GB microSD chip (other sizes work - I'm using 8 GB - but we have 64 GB to send out)
+
+To set up your microSD chip, follow the instructions in the set-up guide, SettingUpYourEV3.txt. 

@@ -1,0 +1,21 @@
+If you find that you are coming across a problem, check here. I tried to collect all problems I encountered and how I resolved them.
+If you come across a new problem and a solution let me know and I can add it here.
+
+1. The terminal is saying my system time is incorrect. (can cause openSSH and certificate issues)
+  A: Try resetting the system time and date to be local as it might have stopped for whatever reason and is out of date.
+  You will need to use the command 'sudo dpkg-reconfigure tzdata' . If the package dpkg-reconfigure is not found you will need 
+  download it first. Type 'sudo apt-get install debconf' then the above command.
+  
+  If that doesn't fix the time, follow the instructions on this page: 
+    https://wiki.debian.org/DateTime (Thank you, Caleb!)
+    See this page for more information:
+    https://www.debian.org/doc/manuals/system-administrator/ch-sysadmin-time.html
+
+2. My run_forever function isn't working. What do I do?
+  A: I found a quirky fix for this. After you call run_forever on your motor, call 'time.wait()' (this function doesn't exist). Since the
+    system will never find this function the motor will continue to run as it searches for the function but still allow new input and
+    function calls. It will result in a http 500 server error saying this function doesn't exist. You can ignore it. The EV3 still runs
+    fine. The problem is that the Python-language-bindings aren't updated as often as the ev3dev system is so they're a bit behind and
+    some functions may break. This is the only case I've found so far. 
+  
+    You can see the wrapper function I wrote in appJSON.py in the EventServer folder where I implement this for my set_lm() function.
