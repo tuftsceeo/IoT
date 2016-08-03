@@ -46,7 +46,11 @@ battery should be around 8.##.
     4. You probably won't end up using Roberta Lab. That was a new feature added as of the most recent major update on the os system 
     and I haven't looked into its abilities. If you do, let me know and we can update this point.
 
-To progress further, you will need a internet connection. If your network requires device approval you must provide the appropriate information (like MAC address) to your wireless network.
+To progress further, you will need a internet connection. If your network requires device approval you must provide the appropriate
+information (like MAC address) to your wireless network. To get your brick's new (unchanging) MAC address from your Wifi dongle, go to
+the wireless network of your choice, connect and click down in that network's menu to ENET. Click on this option and click down until
+you see 'MAC address' followed by a combination of letters and numbers like this:
+    A1:23:4B:5C:67 (this is an example)
 
 5. **Update, Upgrade**
     Once you've installed the system you'll want to update and upgrade all packages on your os system that have newer versions. You 
@@ -55,6 +59,12 @@ To progress further, you will need a internet connection. If your network requir
   
   Update finds the newest version of all packages while upgrade installs these new versions so it's simple to do update first, then 
   upgrade.
+
+  To do anything with your brick, you must ssh into your brick with the following information.
+    Username: robot
+    Password: maker
+    
+  Or in other words, type 'ssh robot@yourRobot'sIP' and when prompted for a password, type maker, then press the Enter key.
   
   To update type in the following line in your terminal:
   - sudo apt-get update
