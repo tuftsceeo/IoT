@@ -1,7 +1,7 @@
 # appString.py
-#   purp:
-#   created by:
-#   edited by:
+#   purp: to take in a string with parameters separated by colons; parse this input and respond to get and set requests
+#   created by: Juliana Furgala
+#   edited by: August 3, 2016 to add comments
 
 # tutorial for set-up found here: https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
 from flask import Flask, render_template, request
@@ -60,6 +60,7 @@ def process_command(status, sm_type, port, info, value):
     return result
 
 
+# touch sensor get wrapper function
 def get_touch(port, info):
     try:
         if info == 'value':
@@ -68,6 +69,7 @@ def get_touch(port, info):
         return "Not found"
 
 
+# lm is large motor; get large motor wrapper function
 def get_lm(port, info):
     try:
         if info == 'position':
@@ -76,6 +78,7 @@ def get_lm(port, info):
         return "Not found"
 
 
+# lm = large motor; set large motor wrapper function
 def set_lm(port, info, value):
     try:
         i = ev3.LargeMotor(port)
