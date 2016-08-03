@@ -64,7 +64,9 @@ you see 'MAC address' followed by a combination of letters and numbers like this
     Username: robot
     Password: maker
     
-  Or in other words, type 'ssh robot@yourRobot'sIP' and when prompted for a password, type maker, then press the Enter key.
+  Or in other words, open a termina window, type 'ssh robot@yourRobot'sIP' and when prompted for a password, type 'maker', then press
+  the Enter key. Your password will likely not show up on your terminal screen for security reasons but it is still there if you've
+  typed it.
   
   To update type in the following line in your terminal:
   - sudo apt-get update
