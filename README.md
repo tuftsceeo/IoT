@@ -18,7 +18,7 @@ link: https://github.com/ev3dev/ev3dev/releases . Find the most current ev3dev J
 the most current released version is ev3dev-jessie-2015-12-30). Download the first ZIP file, open and transfer the contents onto 
 the microSD card. 
 
-Follow this tutorial for setting up for microSD card.
+Follow this tutorial for setting up for microSD card: http://www.ev3dev.org/docs/getting-started/
 
 3. **Have your EV3 turned off. Now plug the microSD card into the SD card slot** on the side of your ev3. Try turning on your ev3. When
 your ev3 boots, it should now be running Jessie (linux) and Monobrick. Note that the interface will look different from the default 
