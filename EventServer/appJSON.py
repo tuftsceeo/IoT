@@ -1,3 +1,9 @@
+# appJSON.py
+#   purp: to accept JSON strings from an input and interpret get and set requests;
+#       uses wrapper functions to call ev3dev functions on linux system
+#   created by: Juliana Furgala
+#   last edited on: August 3, 2016 for updating comments
+
 # tutorial for set-up found here: https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
 from flask import Flask, render_template, request, json
 from flask_cors import CORS, cross_origin
@@ -6,9 +12,6 @@ import ev3dev.ev3 as ev3
 import logging, time
 
 PYTHONIOENCODING = 'utf-8'  # set the language to standard English characters (in case your system isn't)
-
-# m = ev3.LargeMotor('outA')
-# ts = ev3.TouchSensor('in1')
 
 app = Flask(__name__)
 # basic logging, tells you when you have received a request ('GET'/'POST', etc.)
@@ -33,7 +36,12 @@ def index():
 #        print("Command received")
         data = json.loads(JSONinput)
 #        print(
-#            "status is ", data['status'], " and sm_type is", data['sm_type'], " and port is ", data['port'], " and info is ", data['info'], " and value is ", data['value'])
+#            "status is ", data['status'], " and io_type is", data['io_type'], " and port is ", data['port'], " and info is ", data['info'], " and value is ", data['value'], " and mode is ", data['mode'])
+        # status, io_type, info, mode are used for get and set
+        # status is get/set, io_type is input/output type,
+        # info is the function you want called, mode is the
+        # units or mode you want to get back / set 
+        # value parameter is used for set only, to send an int
         requesteddata = str(process_command(data))
         return json.jsonify(httpCode=200, value=requesteddata)
 
@@ -44,20 +52,27 @@ def index():
 
 def process_command(data):
     status = data['status']
-    sm_type = data['sm_type']
+    io_type = data['io_type']
     
     result = "Not found"
     if status == 'get':
-        if sm_type == 'touch':
+        if io_type == 'touch':
             result = get_touch(data['port'], data['info'])
-        if sm_type == 'large motor':
-            result = get_lm(data['port'], data['info'])
+        if io_type == 'ultrasonic':
+            result = get_ultrasonic(data['port'], data['info'], data['mode'])
+        if io_type == 'color':
+            result = get_color(data['port'], data['info'], data['mode']) 
+        if io_type == 'large motor':
+            result = get_lm(data['port'], data['info'], data['mode'])
     if status == 'set':
-        if sm_type == 'large motor':
-            set_lm(data['port'], data['info'], data['value'])
-        return "successful set"
+        if io_type == 'large motor':
+            result = set_lm(data['port'], data['info'], data['value'], data['timer'])
+        if io_type == 'sound':
+            result = set_sound(data['value'], data['mode'])
+        if io_type == 'led':
+            result = set_led(data['info'], data['value'], data['mode'])
     return result
-    
+
 
 # get_touch
 #   purp: to return the current value from a touch sensor
@@ -69,36 +84,111 @@ def get_touch(port, info):
         return "Not found"
 
 
+# get_ultrasonic (US)
+#   purp: to return the current value of a US in cm or in
+def get_ultrasonic(port, info, mode):
+    try:
+        if info == 'value':
+            if mode == 'cm':
+                return ev3.UltrasonicSensor(port).value()
+            if mode == 'in':
+                return ev3.UltrasonicSensor(port).value()*0.393701
+    except ValueError:
+        return "Not found"
+
+
+# get_color
+#   purp: to return the current value of the color sensor in a certain mode;
+#       has ambient, reflected, color recognition modes, etc.
+def get_color(port, info, mode):
+    try:
+        if info == 'value':
+            ev3.ColorSensor(port).mode(mode)
+            return ev3.ColorSensor(port).value()
+    except ValueError:
+        return "Not found"
+
+
 # get_lm
 #   purp: to return a value/stat from a large motor
-def get_lm(port, info):
+def get_lm(port, info, mode):
     try:
         if info == 'position':
-            return ev3.LargeMotor(port).position()
+            if mode == 'rotations':
+                return ev3.LargeMotor(port).position()/ev3.LargeMotor(port).count_per_rot()
+            elif mode == 'degrees':
+                return ev3.LargeMotor(port).position()
+        if info == 'duty_cycle':
+            return ev3.LargeMotor(port).duty_cycle()
+        if info == 'speed':
+            return ev3.LargeMotor(port).speed()
     except ValueError:
         return "Not found"
 
 
 # set_lm
-#   purp: to run a function for a large motor with a given value
-def set_lm(port, info, value):
+#   purp: to run a function for a large motor with given values
+def set_lm(port, info, value, timer):
     try:
         i = ev3.LargeMotor(port)
         power = int(value)
         if info == 'run_forever':
             i.run_forever(duty_cycle_sp=power)
-            time.wait(1)  # this will cause an error but still run; it's a work-around for the ftn not working correctly; ignorable
+            time.wait(1)
+        if info == 'run_timed':
+            i.run_timed(time_sp=timer, duty_cycle_sp=power)
             # i.run_timed(time_sp = 1000000000, duty_cycle_sp = value)
         if info == 'stop':
             i.stop()
         if info == 'reset':
             i.reset()
+        if info == 'switch':
+            i.duty_cycle_sp(i.duty_cycle_sp * -1)
     except ValueError:
         return "Not found"
 
 
-# needs to be fixed; wants to JSON parse...
-# To be: a page that takes in form data and responds
+# set_sound
+#   purp: to emit a chosen sound
+def set_sound(value, mode):
+    try:
+        if mode == 'tone':
+            ev3.Sound.tone(value)
+        if mode == 'beep':
+            ev3.Sound.beep(value)
+        if mode == 'file':
+            ev3.Sound.play(value)
+        if mode == 'message':
+            ev3.Sound.speak(value)
+        return "successful set"
+    except ValueError:
+        return "Not found"
+
+
+# set_led
+#   purp: to set the colors of the LEDs behind the brick buttons;
+#       mode (which side) = left, right, both
+def set_led(info, value, mode):
+    try:
+        if info == 'on':
+            if mode == 'LEFT' or mode == 'RIGHT':
+                Leds.set_color('Leds.'+mode, 'Leds.'+value)
+            if mode == 'BOTH':
+                Leds.set_color(Leds.LEFT, 'Leds.'+value)
+                Leds.set_color(Leds.RIGHT, 'Leds.'+value)
+            
+        elif info == 'off':
+            if mode == 'LEFT' or mode == 'RIGHT':
+                Leds.off('Leds.'+mode)
+            if mode == 'BOTH':
+                Leds.all_off()
+        return "successful set"
+    except ValueError:
+        return "Not found"
+    
+
+# needs to be fixed; wants to JSON parse a form...
+# To be: a locally hosted page that takes in form data and responds to commands
 @app.route('/1', methods=["GET", "POST"])
 def index1():
     if request.method == "POST":
@@ -115,15 +205,14 @@ def index1():
         return render_template('index.html')
 
 
-# error handling -
-
-@app.errorhandler(400) # client-side error; something wrong with the browser
+# error handling for broad server and client issues
+@app.errorhandler(400)  # client-side error; something wrong with client browser/interface
 def client_error(error):
     app.logger.error('Client Error: %s', error)
     return ('{httpCode: %s}', error)
 
 
-@app.errorhandler(500) # server error; something wrong with the brick's server
+@app.errorhandler(500)  # server-side error; something wrong with the brick's server
 def internal_server_error(error):
     app.logger.error('Server Error: %s', error)
     return ('{httpCode: %s}', error)
