@@ -84,5 +84,9 @@ If you use vim to edit you are all set but if you use emacs you will have to ins
   Emacs is a pretty big download (289 mB) so it will take a while.
   From: http://www.thegeekstuff.com/2010/07/install-emacs-editor-on-linux/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+TheGeekStuff+(The+Geek+Stuff)
 
+What are the function names?
+--------------
+Check out FunctionList.txt for a basic (incomplete) list of functions you can call and what to pass in, as well as for links to helpful resources. If there is something you need that if missing, bring it up as an issue and I can add it.
+
 This project is funded by the LEGO Group.
 --------------
