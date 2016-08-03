@@ -83,3 +83,6 @@ If you use vim to edit you are all set but if you use emacs you will have to ins
   
   Emacs is a pretty big download (289 mB) so it will take a while.
   From: http://www.thegeekstuff.com/2010/07/install-emacs-editor-on-linux/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+TheGeekStuff+(The+Geek+Stuff)
+
+This project is funded by the LEGO Group.
+--------------
