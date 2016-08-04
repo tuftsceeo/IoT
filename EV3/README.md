@@ -88,7 +88,6 @@ you see 'MAC address' followed by a combination of letters and numbers like this
   - sudo apt-get install curl
   - sudo curl https://bootstrap.pypa.io/get-pip.py | python 
   	- If that doesn't work and you receive a 'permission denied' error, try this command instead: sudo apt-get install python-pip
-  - sudo pip easy_install
 
   If you see error messages about perl locale (see below) type in the commands below this box into your terminal:
 ```
