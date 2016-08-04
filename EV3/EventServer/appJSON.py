@@ -11,7 +11,7 @@ from ev3dev import *
 import ev3dev.ev3 as ev3
 import logging, time
 from ev3dev.auto import list_motors
-#import tweepy
+# import tweepy
 
 PYTHONIOENCODING = 'utf-8'  # set the language to standard English characters (in case your system isn't)
 
@@ -95,9 +95,9 @@ def get_ultrasonic(port, info, mode):
     try:
         if info == 'value':
             if mode == 'cm':
-                return ev3.UltrasonicSensor(port).value()
+                return ev3.UltrasonicSensor(port).value()*0.1
             if mode == 'in':
-                return ev3.UltrasonicSensor(port).value()*0.393701
+                return ev3.UltrasonicSensor(port).value()*0.1*0.393701
     except ValueError:
         return "Not found"
 
@@ -105,16 +105,16 @@ def get_ultrasonic(port, info, mode):
 # get_color
 #   purp: to return the current value of the color sensor in a certain mode;
 #       has ambient, reflected, color recognition modes, etc.
-def get_color(port, info, mode):
+def get_color(port, info, mymode):
     try:
         if info == 'value':
-            ev3.ColorSensor(port).mode(mode)
+            ev3.ColorSensor(port).mode(mymode)
             return ev3.ColorSensor(port).value()
     except ValueError:
         return "Not found"
 
 
-# get_lm
+# get_motor
 #   purp: to return a value/stat from a motor
 def get_motor(io_type, port, info, mode):
     try:
@@ -174,7 +174,7 @@ def set_sound(value, mode):
             ev3.Sound.beep(value)
         if mode == 'file':
             ev3.Sound.play(value)
-        if mode == 'message':
+        if mode == 'speech':
             ev3.Sound.speak(value)
         return "successful set"
     except ValueError:
