@@ -88,8 +88,8 @@ you see 'MAC address' followed by a combination of letters and numbers like this
   - sudo apt-get install curl
   - sudo curl https://bootstrap.pypa.io/get-pip.py | python
 
-  If you see error messages about perl (see below) type in the command below this box into your terminal:
-'
+  If you see error messages about perl (see below) type in the commands below this box into your terminal:
+```
   perl: warning: Setting locale failed.
   perl: warning: Please check that your locale settings:
 	  LANGUAGE = (unset),
@@ -97,8 +97,18 @@ you see 'MAC address' followed by a combination of letters and numbers like this
 	  LANG = "en_US.utf8"
     are supported and installed on your system.
   perl: warning: Falling back to the standard locale ("C").
-'
+```
+  -  LANGUAGE=en_US.UTF-8
+  -  LANG=en_US.UTF-8
+  -  LC_ALL=en_US.UTF-8
+  -  sudo locale-gen en_US.UTF-8 
+     This command should show you your current system configuration. All setting values should be 'en_US.UTF-8' (one or two 
+	might be blank).
+  -  dpkg-reconfigure locales 
+     Wait and this command will give you a pop up that allows you to set your system confiuration. Choose 'en_US.UTF-8' in the first menu and 'none' in the second menu.
   -  sudo locale-gen en_US.UTF-8
+     Now it should show your updated system configuration.
+  -  Thanks to these set commands from https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian .
 
 Some other potentially helpful packages are below:
   - sudo apt-get install locate (Allows you to 'find' any package you have installed or know if one is not installed)
