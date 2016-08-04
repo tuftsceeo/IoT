@@ -89,7 +89,7 @@ you see 'MAC address' followed by a combination of letters and numbers like this
   - sudo curl https://bootstrap.pypa.io/get-pip.py | python
 
   If you see error messages about perl (see below) type in the command below this box into your terminal:
-  '''
+'
   perl: warning: Setting locale failed.
   perl: warning: Please check that your locale settings:
 	  LANGUAGE = (unset),
@@ -97,7 +97,7 @@ you see 'MAC address' followed by a combination of letters and numbers like this
 	  LANG = "en_US.utf8"
     are supported and installed on your system.
   perl: warning: Falling back to the standard locale ("C").
-'''
+'
   -  sudo locale-gen en_US.UTF-8
 
 Some other potentially helpful packages are below:
