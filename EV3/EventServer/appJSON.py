@@ -10,6 +10,8 @@ from flask_cors import CORS, cross_origin
 from ev3dev import *
 import ev3dev.ev3 as ev3
 import logging, time
+from ev3dev.auto import list_motors
+#import tweepy
 
 PYTHONIOENCODING = 'utf-8'  # set the language to standard English characters (in case your system isn't)
 
@@ -62,15 +64,18 @@ def process_command(data):
             result = get_ultrasonic(data['port'], data['info'], data['mode'])
         if io_type == 'color':
             result = get_color(data['port'], data['info'], data['mode']) 
-        if io_type == 'large motor':
-            result = get_lm(data['port'], data['info'], data['mode'])
+        if io_type == 'large motor' or io_type == 'medium motor':
+            result = get_motor(data['io_type'], data['port'], data['info'], data['mode'])
     if status == 'set':
-        if io_type == 'large motor':
-            result = set_lm(data['port'], data['info'], data['value'], data['timer'])
+        if io_type == 'large motor' or io_type == 'medium motor':
+            result = set_motor(data['io_type'], data['port'], data['info'], data['value'])
         if io_type == 'sound':
             result = set_sound(data['value'], data['mode'])
         if io_type == 'led':
             result = set_led(data['info'], data['value'], data['mode'])
+        if io_type == 'twitter':
+#            result = set_twitter_post(data['port'], data['info'], data['value'])
+             result = 'theoretically sending a tweet'
     return result
 
 
@@ -110,43 +115,53 @@ def get_color(port, info, mode):
 
 
 # get_lm
-#   purp: to return a value/stat from a large motor
-def get_lm(port, info, mode):
+#   purp: to return a value/stat from a motor
+def get_motor(io_type, port, info, mode):
     try:
+        if io_type == 'large motor':
+            i = ev3.LargeMotor(port)
+        elif io_type == 'medium motor':
+            i = ev3.MediumMotor(port)
         if info == 'position':
             if mode == 'rotations':
-                return ev3.LargeMotor(port).position()/ev3.LargeMotor(port).count_per_rot()
+                return i.position()/i.count_per_rot()
             elif mode == 'degrees':
-                return ev3.LargeMotor(port).position()
+                return i.position()
         if info == 'duty_cycle':
-            return ev3.LargeMotor(port).duty_cycle()
+            return i.duty_cycle()
         if info == 'speed':
-            return ev3.LargeMotor(port).speed()
+            return i.speed()
     except ValueError:
         return "Not found"
 
 
-# set_lm
-#   purp: to run a function for a large motor with given values
-def set_lm(port, info, value, timer):
+# set_motor
+#   purp: to run a function for a motor with given values
+def set_motor(io_type, port, info, value):
     try:
-        i = ev3.LargeMotor(port)
+        if io_type == 'large motor':
+            i = ev3.LargeMotor(port)
+        elif io_type == 'medium motor':
+            i = ev3.MediumMotor(port)
         power = int(value)
-        if info == 'run_forever':
+        if info == 'run forever':
             i.run_forever(duty_cycle_sp=power)
             time.wait(1)
-        if info == 'run_timed':
-            i.run_timed(time_sp=timer, duty_cycle_sp=power)
-            # i.run_timed(time_sp = 1000000000, duty_cycle_sp = value)
+        #if info == 'run_timed':
+        #    i.run_timed(time_sp=timer, duty_cycle_sp=power)
         if info == 'stop':
-            i.stop()
+            i.stop(stop_action=value)
         if info == 'reset':
             i.reset()
         if info == 'switch':
             i.duty_cycle_sp(i.duty_cycle_sp * -1)
+        if info == 'stop all':
+            # credit for the following two lines goes to dwalton76 : https://github.com/rhempel/ev3dev-lang-python/blob/develop/utils/stop_all_motors.py
+            for motor in list_motors():
+                motor.stop(stop_action=value)
     except ValueError:
         return "Not found"
-
+    
 
 # set_sound
 #   purp: to emit a chosen sound
@@ -172,17 +187,44 @@ def set_led(info, value, mode):
     try:
         if info == 'on':
             if mode == 'LEFT' or mode == 'RIGHT':
-                Leds.set_color('Leds.'+mode, 'Leds.'+value)
+                ev3.Leds.set_color('ev3.Leds.'+mode, 'ev3.Leds.'+value)
             if mode == 'BOTH':
-                Leds.set_color(Leds.LEFT, 'Leds.'+value)
-                Leds.set_color(Leds.RIGHT, 'Leds.'+value)
+                ev3.Leds.set_color(ev3.Leds.LEFT, 'ev3.Leds.'+value)
+                ev3.Leds.set_color(ev3.Leds.RIGHT, 'ev3.Leds.'+value)
             
         elif info == 'off':
             if mode == 'LEFT' or mode == 'RIGHT':
-                Leds.off('Leds.'+mode)
+                ev3.Leds.off('ev3.Leds.'+mode)
             if mode == 'BOTH':
-                Leds.all_off()
+                ev3.Leds.all_off()
         return "successful set"
+    except ValueError:
+        return "Not found"
+
+
+# set_twitter_post
+    #  information for this demo function and code outline came from an online tutorial at:
+    # nodotcom.org/python-twitter-tutorial.html
+def set_twitter_post(port, info, value):
+    try:
+        def get_api(cfg):
+            auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
+            auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
+            return tweepy.API(auth)
+
+        consumer_key, consumer_secret, access_token, access_token_secret = port.split(':')
+        cfg = {
+            "consumer_key": consumer_key,
+            "consumer_secret": consumer_secret,
+            "access_token": access_token,
+            "access_token_secret": access_token_secret
+        }
+
+        api = get_api(cfg)
+
+        if info == 'post':
+            status = api.update_status(status=value)  # value = your message
+            print(status)
     except ValueError:
         return "Not found"
     
