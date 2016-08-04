@@ -88,7 +88,7 @@ you see 'MAC address' followed by a combination of letters and numbers like this
   - sudo apt-get install curl
   - sudo curl https://bootstrap.pypa.io/get-pip.py | python
 
-  If you see error messages about perl (see below) type in the commands below this box into your terminal:
+  If you see error messages about perl locale (see below) type in the commands below this box into your terminal:
 ```
   perl: warning: Setting locale failed.
   perl: warning: Please check that your locale settings:
@@ -102,12 +102,12 @@ you see 'MAC address' followed by a combination of letters and numbers like this
   -  LANG=en_US.UTF-8
   -  LC_ALL=en_US.UTF-8
   -  sudo locale-gen en_US.UTF-8 
-     This command should show you your current system configuration. All setting values should be 'en_US.UTF-8' (one or two 
+     -  This command should show you your current system configuration. All setting values should be 'en_US.UTF-8' (one or two 
 	might be blank).
   -  dpkg-reconfigure locales 
-     Wait and this command will give you a pop up that allows you to set your system confiuration. Choose 'en_US.UTF-8' in the first menu and 'none' in the second menu.
+     -  Wait and this command will give you a pop up that allows you to set your system confiuration. Choose 'en_US.UTF-8' in the first menu and 'none' in the second menu. Press enter to submit your choice.
   -  sudo locale-gen en_US.UTF-8
-     Now it should show your updated system configuration.
+     -  Now it should show your updated system configuration.
   -  Thanks to these set commands from https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian .
 
 Some other potentially helpful packages are below:
@@ -124,7 +124,7 @@ If you use vim to edit you are all set but if you use emacs you will have to ins
 
 What are the function names?
 --------------
-Check out FunctionList.txt for a basic (incomplete) list of functions you can call and what to pass in, as well as for links to helpful resources. If there is something you need that if missing, bring it up as an issue and I can add it.
+Check out FunctionList.txt for a basic (incomplete) list of functions you can call and what to pass in, as well as for links to helpful resources. If there is something you need that is missing, bring it up as an issue and I can add it.
 
 This project is funded by the LEGO Group.
 --------------
