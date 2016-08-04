@@ -74,8 +74,8 @@ def process_command(data):
         if io_type == 'led':
             result = set_led(data['info'], data['value'], data['mode'])
         if io_type == 'twitter':
-#            result = set_twitter_post(data['port'], data['info'], data['value'])
-             result = 'theoretically sending a tweet'
+            # result = set_twitter_post(data['port'], data['info'], data['value'])
+            result = 'theoretically sending a tweet'
     return result
 
 
@@ -122,6 +122,7 @@ def get_motor(io_type, port, info, mode):
             i = ev3.LargeMotor(port)
         elif io_type == 'medium motor':
             i = ev3.MediumMotor(port)
+
         if info == 'position':
             if mode == 'rotations':
                 return i.position()/i.count_per_rot()
@@ -147,7 +148,7 @@ def set_motor(io_type, port, info, value):
         if info == 'run forever':
             i.run_forever(duty_cycle_sp=power)
             time.wait(1)
-        #if info == 'run_timed':
+        # if info == 'run_timed':
         #    i.run_timed(time_sp=timer, duty_cycle_sp=power)
         if info == 'stop':
             i.stop(stop_action=value)
@@ -186,16 +187,34 @@ def set_sound(value, mode):
 def set_led(info, value, mode):
     try:
         if info == 'on':
-            if mode == 'LEFT' or mode == 'RIGHT':
-                ev3.Leds.set_color('ev3.Leds.'+mode, 'ev3.Leds.'+value)
-            if mode == 'BOTH':
-                ev3.Leds.set_color(ev3.Leds.LEFT, 'ev3.Leds.'+value)
-                ev3.Leds.set_color(ev3.Leds.RIGHT, 'ev3.Leds.'+value)
+            if mode == 'left':
+                if value == 'green':
+                    ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
+                if value == 'red':
+                    ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.RED)
+                if value == 'yellow':
+                    ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.YELLOW)
+                if value == 'amber':
+                    ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.AMBER)
+            if mode == 'right':
+                if value == 'green':
+                    ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
+                if value == 'red':
+                    ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.RED)
+                if value == 'yellow':
+                    ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.YELLOW)
+                if value == 'amber':
+                    ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.AMBER)
+            if mode == 'both':
+                set_led(info, value, 'left')
+                set_led(info, value, 'right')
             
         elif info == 'off':
-            if mode == 'LEFT' or mode == 'RIGHT':
-                ev3.Leds.off('ev3.Leds.'+mode)
-            if mode == 'BOTH':
+            if mode == 'left':
+                ev3.Leds.off(ev3.Leds.LEFT)
+            if mode == 'right':
+                ev3.Leds.off(ev3.Leds.RIGHT)
+            if mode == 'both':
                 ev3.Leds.all_off()
         return "successful set"
     except ValueError:
