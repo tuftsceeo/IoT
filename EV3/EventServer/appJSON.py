@@ -60,21 +60,23 @@ def process_command(data):
     if status == 'get':
         if io_type == 'touch':
             result = get_touch(data['port'], data['settings'])
-        if io_type == 'ultrasonic':
+        elif io_type == 'ultrasonic':
             result = get_ultrasonic(data['port'], data['settings'])
-        if io_type == 'color':
+        elif io_type == 'color':
             result = get_color(data['port'], data['settings'])
-        if io_type == 'large motor' or io_type == 'medium motor':
+        elif io_type == 'large motor' or io_type == 'medium motor':
             result = get_motor(data['io_type'], data['port'], data['settings'])
     if status == 'set':
         if io_type == 'large motor' or io_type == 'medium motor':
             result = set_motor(data['io_type'], data['port'], data['settings'])
-        if io_type == 'sound':
+        elif io_type == 'sound':
             result = set_sound(data['settings'])
-        if io_type == 'led':
+        elif io_type == 'led':
             result = set_led(data['settings'])
-        if io_type == 'twitter':
-            # result = set_twitter_post(data['port'], data['info'], data['value'])
+        elif io_type == 'stop all':
+            result = stop_all()
+        elif io_type == 'twitter':
+            # result = set_twitter_post(data['port'], data['settings'])
             result = 'theoretically sending a tweet'
     return result
 
@@ -83,7 +85,7 @@ def process_command(data):
 #   purp: to return the current value from a touch sensor
 def get_touch(port, settings):
     try:
-        if settings['data_format'] == 'raw_touch':
+        if settings['touch_mode'] == 'raw_touch':
             return ev3.TouchSensor(port).value()
     except ValueError:
         return "Not found"
@@ -93,7 +95,7 @@ def get_touch(port, settings):
 #   purp: to return the current value of a US in cm or in
 def get_ultrasonic(port, settings):
     try:
-        if settings['data_format'] == 'raw_distance':
+        if settings['us_mode'] == 'distance':
             if settings['units'] == 'cm':  # convert from mm to cm
                 return ev3.UltrasonicSensor(port).value()*0.1
             if settings['units'] == 'in':  # convert from mm to in (mm -> cm -> in)
@@ -107,13 +109,13 @@ def get_ultrasonic(port, settings):
 #       has ambient, reflected, color recognition modes, etc.
 def get_color(port, settings):
     try:
-        if settings['data_format'] == 'raw':
-            if settings['color_mode'] == 'reflected':
-                ev3.ColorSensor(port).modes("COL_REFLECTED")
-            if settings['color_mode'] == 'ambient':
-                ev3.ColorSensor(port).modes("COL_AMBIENT")
-            if settings['color_mode'] == 'color':
-                ev3.ColorSensor(port).modes("COL_COLOR")
+        #if settings['data_format'] == 'raw':
+        if settings['color_mode'] == 'reflected':
+            ev3.ColorSensor(port).modes("COL_REFLECTED")
+        if settings['color_mode'] == 'ambient':
+            ev3.ColorSensor(port).modes("COL_AMBIENT")
+        if settings['color_mode'] == 'color':
+            ev3.ColorSensor(port).modes("COL_COLOR")
 
         return ev3.ColorSensor(port).value()
     except ValueError:
@@ -131,13 +133,13 @@ def get_motor(io_type, port, settings):
 
         if settings['motor_mode'] == 'position':
             if settings['units'] == 'rotations':
-                return i.position()/i.count_per_rot()
+                return i.position/i.count_per_rot
             elif settings['units'] == 'degrees':
-                return i.position()
+                return i.position
         if settings['motor_mode'] == 'duty_cycle':
-            return i.duty_cycle()
+            return i.duty_cycle
         if settings['motor_mode'] == 'speed':
-            return i.speed()
+            return i.speed
     except ValueError:
         return "Not found"
 
@@ -157,15 +159,11 @@ def set_motor(io_type, port, settings):
         # if info == 'run_timed':
         #    i.run_timed(time_sp=timer, duty_cycle_sp=power)
         if settings['motor_mode'] == 'stop':
-            i.stop(stop_action=value)
+            i.stop(stop_action=power)
         if settings['motor_mode'] == 'reset':
             i.reset()
         if settings['motor_mode'] == 'switch':
             i.duty_cycle_sp(i.duty_cycle_sp * -1)
-        if settings['motor_mode'] == 'stop all':
-            # credit for the following two lines goes to dwalton76 : https://github.com/rhempel/ev3dev-lang-python/blob/develop/utils/stop_all_motors.py
-            for motor in list_motors():
-                motor.stop(stop_action=value)
     except ValueError:
         return "Not found"
     
@@ -229,11 +227,22 @@ def set_led(settings):
         return "Not found"
 
 
+def stop_all():
+    try:
+        # credit for the following two lines goes to dwalton76 : https://github.com/rhempel/ev3dev-lang-python/blob/develop/utils/stop_all_motors.py
+        for motor in list_motors():
+            motor.stop(stop_action="coast")
+                                            
+    except ValueError:
+        return "Not found"
+
+
 # set_twitter_post
     #  information for this demo function and code outline came from an online tutorial at:
     # nodotcom.org/python-twitter-tutorial.html
-def set_twitter_post(port, info, value):
+def set_twitter_post(port, settings):
     try:
+        
         def get_api(cfg):
             auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
             auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
@@ -249,9 +258,9 @@ def set_twitter_post(port, info, value):
 
         api = get_api(cfg)
 
-        if info == 'post':
-            status = api.update_status(status=value)  # value = your message
-            print(status)
+        if settings['mode'] == 'post':
+            status = api.update_status(status=settings['value'])  # value = your message
+            # print(status)
     except ValueError:
         return "Not found"
     
