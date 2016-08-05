@@ -172,15 +172,21 @@ def set_motor(io_type, port, settings):
 #   purp: to emit a chosen sound
 def set_sound(settings):
     try:
-        value = settings['value']
         if settings['sound_mode'] == 'tone':
-            ev3.Sound.tone(value)
-        if settings['sound_mode'] == 'beep':
-            ev3.Sound.beep(value)
+            frequency = settings['frequency']
+            duration = settings['duration']
+            ev3.Sound.tone([(frequency, duration, 100)])  # 100 ms delay between tones
+        if settings['sound_mode'] == 'note':
+            duration = settings['duration']
+            note = settings['note']
+            octave = settings['octave']
+            
         if settings['sound_mode'] == 'file':
-            ev3.Sound.play(value)
+            filename = settings['filename']
+            ev3.Sound.play(filename)
         if settings['sound_mode'] == 'speech':
-            ev3.Sound.speak(value)
+            message = settings['message']
+            ev3.Sound.speak(message)
         return "successful set"
     except ValueError:
         return "Not found"
