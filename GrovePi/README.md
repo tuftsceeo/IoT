@@ -8,12 +8,12 @@ Grove Pi Documentation
 - Raspberry Pi Power Supply
 - Raspberry Pi Ethernet Cable
 - Micro SD Card (Raspbian for robots)
+
 *Dexter Industry Products are highly recommended
 
 **Getting Started with the Grove Pi?**
-If you are just starting with the GrovePi, here is a step-by-step process to get your GrovePi up and running. 
 
-**Setting Up:**
+If you are just starting with the GrovePi, here is a step-by-step process to get your GrovePi up and running. 
 
         1. Attach GrovePi on top of Raspberry Pi - should fit nice and snug.
         
@@ -49,14 +49,18 @@ Here’s a little video if you’d like to see a full walk-through, step by step
 - https://www.youtube.com/watch?v=L0U7GsgMJTI&feature=youtu.be
 
 **Change your password if it is still the default password!**
-When logged in as the pi user, you can change your password with the passwd command. Enter *passwd* on the command line and hit Enter. You’ll be prompted to enter your current password to authenticate, and then asked for a new password. Hit Enter on completion and you’ll be asked to confirm it. Note that no characters will be displayed while entering your password. Once correctly confirmed, you’ll see a success message and the new password will be in effect immediately. For more information, check out:
+
+When logged in as the pi user, you can change your password with the passwd command. Enter **passwd** on the command line and hit Enter. You’ll be prompted to enter your current password to authenticate, and then asked for a new password. Hit Enter on completion and you’ll be asked to confirm it. Note that no characters will be displayed while entering your password. Once correctly confirmed, you’ll see a success message and the new password will be in effect immediately. For more information, check out:
 - https://www.raspberrypi.org/documentation/linux/usage/users.md
 
 **Using a used Raspberry Pi and SD card? **
+
 Here is a SD Formatter for Mac Download (If you need to reformat your SD card) 
 - https://www.sdcard.org/downloads/formatter_4/eula_mac/
+- *Warning* - Reformatting will erase everything on your SD card, so make sure to save any important files.
 
 **How to get the Raspberry Pi software to communicate with the GrovePi**
+
 The next step is to get the GrovePi communicating with the Raspberry Pi. 
 
         1. Make sure the Raspberry Pi is powered on. Without the GrovePi attached, open a terminal (can SSH on your computer or use terminal on a monitor).
@@ -102,29 +106,34 @@ For more information and some helpful pictures:
 
 ----------------------
 **Understanding the Grove Ports:**
+
 The GrovePi is stacked on top of the Raspberry Pi without the need for any other connections. Communication between the two occurs over the I2C interface. All Grove modules connect to the universal Grove connectors on the GrovePi shield via the universal 4 pin connector cable.
 
-*I2C Ports* 
+Grove modules, which work on analog and digital signals, connect directly to the ATMEGA328 microcontroller on the Grove Pi.  The microcontroller acts as an interpreter between the Raspberry Pi and the Grove sensors.  It sends, receives, and executes commands sent by the RaspberryPi.
+
+In addition, the GrovePi allows the Raspberry Pi to access some Grove sensors directly.  The Raspberry Pi has an I2C Bus and a Serial bus.  These buses can directly connect to sensors via the I2C Ports and the USART Port.
+
+**I2C Ports** 
 
 Directly accessible from Raspberry Pi or data can be interpreted by GrovePi and sent to Raspberry Pi
 - For sensors like Grove Accelerometer or OLED
 
-*Analog Ports*
+**Analog Ports**
 
 Accessible from the Raspberry Pi by sending commands to the GrovePi
 - For reading analog data from sensors like Grove Temperature Sensor
 
-*Digital Ports* 
+**Digital Ports**
 
 Accessible from the Raspberry Pi by sending commands to the GrovePi
 - For digital input and output, can be used for switches or sensors like Ultrasonic Ranger
 
-*Raspberry Pi Serial*
+**Raspberry Pi Serial**
 
 Grove Serial modules can be directly connected and used by the Raspberry Pi
 - For serial I/O to the Raspberry Pi
 
-*GrovePi Serial*
+**GrovePi Serial**
 
 Not connected to the Raspberry Pi directly
 - For serial I/O to the GrovePi. Grove Serial modules can be connected, its data interpreted and sent to the RaspberryPi
@@ -135,26 +144,29 @@ For more information about ports: http://www.dexterindustries.com/GrovePi/engine
 Projects
 -------------
 **Raspberry Pi Projects for the Grove Pi Sensors:**
+
 There are many good examples using all of the sensors, including: LED blink, LED Fade, Tilt Buzzer, Home Weather Display, Sensor Twitter Feed, Who’s at the Door, Open Wifi Finder, and more obscure projects. 
 - Find them all here: http://www.dexterindustries.com/GrovePi/projects-for-the-raspberry-pi/
 
-A good example, the *Sensor Twitter Feed*, reads the current temperature, light, and sound and instantly prints it out as a tweet. Check out this tutorial on how to send a tweet from a python script (uses tweepy import [Dexter tutorial uses twitter import which doesn’t work as well]): 
+A good example, the Sensor Twitter Feed, reads the current temperature, light, and sound and instantly prints it out as a tweet. Check out this tutorial on how to send a tweet from a python script (uses tweepy import [Dexter tutorial uses twitter import which doesn’t work as well]): 
 - http://nodotcom.org/python-twitter-tutorial.html
 
-You could try the opposite of this project and start with the web: *Twitterverse.* Turn on an LED every time it detects a specific hashtag posted on Twitter. Check out this website for further information: 
+You could try the opposite of this project and start with the web: Twitterverse. Turn on an LED every time it detects a specific hashtag posted on Twitter. Check out this website for further information: 
 - https://learn.sparkfun.com/tutorials/raspberry-pi-twitter-monitor
 
 **Interested in Building a Python-Powered Web Server with Flask?**
+
 Install the lightweight web framework Flask (sudo pip install -U flask-cors) and set up a basic web server with different pages, using Python, HTML, and CSS. Here is a really thorough step-by-step tutorial: 
 - https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
 
 **What do the GrovePi sensors return? **
-- *LED*: 1 - 255 for On and its brightness and 0 for Off
-- *Button*: 1 for pressed and 0 for not
-- *Rotary Angle Sensor*: 1 - 300 for angle
-- *Light sensor*: 0 - 720+. With a finger covering the sensor, value went down to 240. 
-- *Temperature & Humidity Sensor*: Returns temperature in Celsius and humidity in RH percentage.
-- *Buzzer*: prints out “successful set”, otherwise will buzz!
-- *Sound*: anywhere from 0 - 100+
-- *Ultrasonic*: returns the distance in centimeters, up to 400 cm away.
-- *Display*: prints out “successful set”, and will appear on LCD Backlight
+
+- **LED**: 1 - 255 for On and its brightness and 0 for Off
+- **Button**: 1 for pressed and 0 for not
+- **Rotary Angle Sensor**: 1 - 300 for angle
+- **Light sensor**: 0 - 720+. With a finger covering the sensor, value went down to 240. 
+- **Temperature & Humidity Sensor**: Returns temperature in Celsius and humidity in RH percentage.
+- **Buzzer**: prints out “successful set”, otherwise will buzz!
+- **Sound**: anywhere from 0 - 100+
+- **Ultrasonic**: returns the distance in centimeters, up to 400 cm away.
+- **Display**: prints out “successful set”, and will appear on LCD Backlight
