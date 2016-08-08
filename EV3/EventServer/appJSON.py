@@ -66,6 +66,8 @@ def process_command(data):
             result = get_color(data['port'], data['settings'])
         elif io_type == 'large motor' or io_type == 'medium motor':
             result = get_motor(data['io_type'], data['port'], data['settings'])
+        elif io_type == 'nav button':
+            result = get_button(data['settings'])
     if status == 'set':
         if io_type == 'large motor' or io_type == 'medium motor':
             result = set_motor(data['io_type'], data['port'], data['settings'])
@@ -144,6 +146,28 @@ def get_motor(io_type, port, settings):
         return "Not found"
 
 
+# get_button
+# purp: to return a value based on whether a specified button is pressed
+def get_button(settings):
+    try:
+        button = settings['button']
+        if settings['touch_mode'] == 'raw_touch':
+            if button == 'up':
+                return Button.up
+            elif button == 'down':
+                return Button.down
+            elif button == 'left':
+                return Button.left
+            elif button == 'right':
+                return Button.right
+            elif button == 'enter':
+                return Button.enter
+            elif button == 'backspace':
+                return Button.backspace
+    except ValueError:
+        return "Not found"
+
+
 # set_motor
 #   purp: to run a function for a motor with given values
 def set_motor(io_type, port, settings):
@@ -198,7 +222,7 @@ def set_sound(settings):
 def set_led(settings):
     try:
         if settings['led_mode'] == 'on':
-            value = settings['value']
+            value = settings['color']
             if settings['brick_lights'] == 'left':
                 if value == 'green':
                     ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
