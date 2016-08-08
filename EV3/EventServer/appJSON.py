@@ -172,6 +172,7 @@ def get_button(settings):
             else:
                 print(ev3.Button.check_buttons(buttons=[ev3.Button.left, ev3.Button.right]))
                 return ev3.Button.check_buttons(buttons=['left', 'right'])
+            return "successful set"
     except ValueError:
         return "Not found"
 
@@ -184,18 +185,20 @@ def set_motor(io_type, port, settings):
             i = ev3.LargeMotor(port)
         elif io_type == 'medium motor':
             i = ev3.MediumMotor(port)
-        power = int(settings['value'])
+        power = int(settings['power'])
         if settings['motor_mode'] == 'run forever':
             i.run_forever(duty_cycle_sp=power)
             time.wait(1)
         # if info == 'run_timed':
         #    i.run_timed(time_sp=timer, duty_cycle_sp=power)
         if settings['motor_mode'] == 'stop':
-            i.stop(stop_action=power)
+            stop_type = settings['stop_type']
+            i.stop()
         if settings['motor_mode'] == 'reset':
             i.reset()
         if settings['motor_mode'] == 'switch':
             i.duty_cycle_sp(i.duty_cycle_sp * -1)
+        return "successful set"
     except ValueError:
         return "Not found"
     
