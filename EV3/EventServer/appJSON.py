@@ -153,17 +153,17 @@ def get_button(settings):
         button = settings['button']
         if settings['touch_mode'] == 'raw_touch':
             if button == 'up':
-                return Button.up
+                return ev3.Button.up
             elif button == 'down':
-                return Button.down
+                return ev3.Button.down
             elif button == 'left':
-                return Button.left
+                return ev3.Button.left
             elif button == 'right':
-                return Button.right
+                return ev3.Button.right
             elif button == 'enter':
-                return Button.enter
+                return ev3.Button.enter
             elif button == 'backspace':
-                return Button.backspace
+                return ev3.Button.backspace
     except ValueError:
         return "Not found"
 
