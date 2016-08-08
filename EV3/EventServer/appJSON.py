@@ -153,17 +153,25 @@ def get_button(settings):
         button = settings['button']
         if settings['touch_mode'] == 'raw_touch':
             if button == 'up':
-                return ev3.Button.up
-            elif button == 'down':
-                return ev3.Button.down
-            elif button == 'left':
-                return ev3.Button.left
-            elif button == 'right':
-                return ev3.Button.right
-            elif button == 'enter':
-                return ev3.Button.enter
-            elif button == 'backspace':
-                return ev3.Button.backspace
+                return getattr(ev3.Button, 'up')
+#            elif button == 'down':
+#                return ev3.Button.down
+#            elif button == 'left':
+#                print(ev3.Button.left)
+#                return ev3.Button.left
+#            elif button == 'right':
+#                return ev3.Button.right
+#            elif button == 'enter':
+#                return ev3.Button.enter
+#            elif button == 'backspace':
+#                return ev3.Button.backspace
+#        if settings['touch_mode'] == 'list':
+            if button == '':
+                print(ev3.Button.buttons_pressed)
+                return ev3.Button.buttons_pressed
+            else:
+                print(ev3.Button.check_buttons(buttons=[ev3.Button.left, ev3.Button.right]))
+                return ev3.Button.check_buttons(buttons=['left', 'right'])
     except ValueError:
         return "Not found"
 
@@ -199,7 +207,7 @@ def set_sound(settings):
         if settings['sound_mode'] == 'tone':
             frequency = settings['frequency']
             duration = settings['duration']
-            ev3.Sound.tone([(frequency, duration, 100)])  # 100 ms delay between tones
+            ev3.Sound.tone([(frequency, duration, 1)])  # 1 ms delay between tones
         if settings['sound_mode'] == 'note':
             duration = settings['duration']
             note = settings['note']
@@ -242,8 +250,8 @@ def set_led(settings):
                 if value == 'amber':
                     ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.AMBER)
             if settings['brick_lights'] == 'both':
-                set_led({"led_mode":settings['led_mode'], "value":value, "brick_lights":"left"})
-                set_led({"led_mode":settings['led_mode'], "value":value, "brick_lights":"right"})
+                set_led({"led_mode":settings['led_mode'], "color":settings['color'], "brick_lights":"left"})
+                set_led({"led_mode":settings['led_mode'], "color":settings['color'], "brick_lights":"right"})
             
         elif settings['led_mode'] == 'off':
             if mode == 'left':
