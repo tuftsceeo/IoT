@@ -1,6 +1,6 @@
 # TweetBlinky.py
 # Purpose: to flash an LED whenever a tweet in the world is posted with '#yes';
-          shows how the virtual world can affect the physical world
+#          shows how the virtual world can affect the physical world
 # By: Bianca Capretta
 # Date: August 8th, 2016
 # Used this tutorial for help: https://learn.sparkfun.com/tutorials/raspberry-pi-twitter-monitor
@@ -23,13 +23,14 @@ OAUTH_TOKEN_SECRET = 'nMnG50nvjiFlvdC866wrCzoieBCuLgB5tSKXsA2eeBJTa'
 
 # Setup callbacks from Twython Streamer
 class BlinkyStreamer(TwythonStreamer):
-        def on_success(self, data):
-                if 'text' in data:
-                        print data['text'].encode('utf-8')
-                        print
-                        grovepi.digitalWrite(LED, 1)
-                        time.sleep(1)
-                        grovepi.digitalWrite(LED, 0)
+    def on_success(self, data):
+        if 'text' in data:
+            print data['text'].encode('utf-8')
+            print
+            # when tweet with #yes found, blink LED
+            grovepi.digitalWrite(LED, 1)
+            time.sleep(1)
+            grovepi.digitalWrite(LED, 0)
 
 # setup LED as output
 grovepi.pinMode(LED, "OUTPUT")
@@ -39,9 +40,9 @@ print "Looking for tweets with " + TERMS + "\n"
 
 # create streamer
 try:
-        stream = BlinkyStreamer(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-
-        stream.statuses.filter(track=TERMS)
+    stream = BlinkyStreamer(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+    # filters through every tweet posted in the moment  
+    stream.statuses.filter(track=TERMS)
 
 except KeyboardInterrupt:
         exit()
