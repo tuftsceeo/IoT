@@ -150,28 +150,26 @@ def get_motor(io_type, port, settings):
 # purp: to return a value based on whether a specified button is pressed
 def get_button(settings):
     try:
-        button = settings['button']
+        button = ev3.Button() # create instance of button class
+        button_chosen = settings['button']
         if settings['touch_mode'] == 'raw_touch':
-            if button == 'up':
-                return getattr(ev3.Button, 'up')
-#            elif button == 'down':
-#                return ev3.Button.down
-#            elif button == 'left':
-#                print(ev3.Button.left)
-#                return ev3.Button.left
-#            elif button == 'right':
-#                return ev3.Button.right
-#            elif button == 'enter':
-#                return ev3.Button.enter
-#            elif button == 'backspace':
-#                return ev3.Button.backspace
+            if button_chosen == 'up':
+                return 1 if button.up else 0
+            elif button_chosen == 'down':
+                return 1 if button.down else 0
+            elif button_chosen == 'left':
+                return 1 if button.left else 0
+            elif button_chosen == 'right':
+                return 1 if button.right else 0
+            elif button_chosen == 'enter':
+                return 1 if button.enter else 0
+            elif button_chosen == 'backspace':
+                return 1 if button.backspace else 0
 #        if settings['touch_mode'] == 'list':
-            if button == '':
-                print(ev3.Button.buttons_pressed)
-                return ev3.Button.buttons_pressed
+            # elif button_chosen == '':
+            #     return button.buttons_pressed
             else:
-                print(ev3.Button.check_buttons(buttons=[ev3.Button.left, ev3.Button.right]))
-                return ev3.Button.check_buttons(buttons=['left', 'right'])
+                return 1 if button.check_buttons(buttons=[button_chosen]) else 0
             return "successful set"
     except ValueError:
         return "Not found"
