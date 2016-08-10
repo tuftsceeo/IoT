@@ -2,6 +2,7 @@
 #   purp: to accept JSON strings from an input and interpret get and set requests;
 #       uses wrapper functions to call ev3dev functions on linux system
 #   created by: Juliana Furgala
+#   notes: has less implemented functions than the newer appJSON.py
 #   last edited on: August 3, 2016 for updating comments
 
 # tutorial for set-up found here: https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
