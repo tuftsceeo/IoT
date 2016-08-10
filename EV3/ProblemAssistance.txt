@@ -10,6 +10,10 @@ If you come across a new problem and a solution let me know and I can add it her
     https://wiki.debian.org/DateTime (Thank you, Caleb!)
     See this page for more information:
     https://www.debian.org/doc/manuals/system-administrator/ch-sysadmin-time.html
+    
+  Now check your hardware clock's time to see if it had changed. To see your hardware clock's time, type 'hwclock --show' in your robot's
+  terminal. If it still has not changed you can manually change it by typing 'hwclock --set --date="MM/DD/YYYY ##:##:##' with your
+  current date and time.
 
 2. My run_forever function isn't working. What do I do?
   A: I found a quirky fix for this. After you call run_forever on your motor, call 'time.wait()' (this function doesn't exist). Since the
