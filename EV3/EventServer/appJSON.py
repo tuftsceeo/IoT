@@ -3,7 +3,7 @@
 #       uses wrapper functions to call ev3dev functions on linux system
 #   created by: Juliana Furgala
 #   last edited on: August 3, 2016 for updating comments
-#   notes: I highly suspect my 'try, except' lines in my wrapper (get and set) functions are really working; I recommend fixing those.
+#   notes: I highly suspect my 'try, except' lines in my wrapper (get and set) functions are not working; I recommend fixing those.
 #       It should be minor. It might be I'm throwing the wrong error. 
 
 # tutorial for set-up found here: https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
