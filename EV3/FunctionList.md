@@ -3,24 +3,24 @@ FunctionList
 
 Large/Medium Motor
 --------------
-~ get_motor ~ has
+~ get_motor ~ has  
 position (in rotations or degrees)
 duty_cycle (read about tachometer motors; power)
 speed
 
 Touch Sensor
 --------------
-~ get_touch ~ has
+~ get_touch ~ has  
 raw_touch (aka touch sensor value)
 
 Ultrasonic Sensor
 --------------
-~ get_ultrasonic ~ has
+~ get_ultrasonic ~ has  
 distance (in cm and in)
 
 Color/Light Sensor
 --------------
-~ get_color ~ has
+~ get_color ~ has  
 reflected
 ambient
 color
@@ -35,7 +35,7 @@ LED
 
 Brick Buttons
 --------------
-~ get_button ~ has
+~ get_button ~ has  
 raw_touch (aka whether a brick button is pressed; for left, right, up, down, enter and backspace) 
 
 Sound
