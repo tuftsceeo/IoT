@@ -5,24 +5,30 @@
 #   last edited on: August 3, 2016 for updating comments
 
 # tutorial for set-up found here: https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
+#   note: This tutorial works for any device that you can code in python on, not just a Raspberry Pi. 
+#       It also should work on most/all UNIX systems. 
 from flask import Flask, render_template, request, json
 from flask_cors import CORS, cross_origin
 from ev3dev import *
 import ev3dev.ev3 as ev3
 import logging, time
 from ev3dev.auto import list_motors
+# to use: uncomment the below line; then uncomment line 84 under 'io_type == twitter' and comment out the line below that
+# It's commented out because it doesn't work that well with the EV3; it's VERY slow (think 2-4 minute 'loading' lag for any program if
+# it's commented in). BUT it does work. Maybe change it to Twython to improve that; but you'd have to change the tweepy function.
 # import tweepy
 
 PYTHONIOENCODING = 'utf-8'  # set the language to standard English characters (in case your system isn't)
 
 app = Flask(__name__)
-# basic logging, tells you when you have received a request ('GET'/'POST', etc.)
-logging.basicConfig(level=logging.INFO)
+# basic logging, tells you when you have received a request ('GET'/'POST', etc.); to use, uncomment the line below.
+# logging.basicConfig(level=logging.INFO)
 
 # advanced debugging log, to use, uncomment line below
 # logging.getLogger('flask_cors').level = logging.DEBUG
 
 # resources = what pages you want to have access allowed to, can be 1 page, in this case is '/' (home page)
+#   can change (i.e. '/daisy' to only allow access to a subpage called daisy or '/daisy*' to allow access only to pages off '/daisy')
 # origin = the list of allowed IP addresses to connect, your own is already allowed
 # methods = what can the user/person do to the page(s)
 CORS(app, resources=r'/*', origin="http://130.64.94.22:8888/", methods=["GET", "POST"])
@@ -32,32 +38,33 @@ CORS(app, resources=r'/*', origin="http://130.64.94.22:8888/", methods=["GET", "
 # https://github.com/distortenterprises/Webinterface
 @app.route('/', methods=["GET", "POST"])
 def index():
-    if request.method == "POST":
-        JSONinput = request.get_data()
-
-#        print("Command received")
-        data = json.loads(JSONinput)
-#        print(
-#            "status is ", data['status'], " and io_type is", data['io_type'], " and port is ", data['port'], " and info is ", data['info'], " and value is ", data['value'], " and mode is ", data['mode'])
-        # status, io_type, info, mode are used for get and set
-        # status is get/set, io_type is input/output type,
-        # info is the function you want called, mode is the
-        # units or mode you want to get back / set 
-        # value parameter is used for set only, to send an int
+    # POST is a device sending information to the brick in the form of a request; the brick responds depending on the request
+    if request.method == "POST":  
+        JSONinput = request.get_data()  # take in JSON string from POST request
+        
+        # print("Command received")
+        data = json.loads(JSONinput)  # turn the JSON string into a Python dictionary
         requesteddata = str(process_command(data))
         return json.jsonify(httpCode=200, value=requesteddata)
 
-    elif request.method == "GET":
+    elif request.method == "GET":  # GET is a device asking for information from my server
         # return render_template('index.html')
         return "Successful get request"
 
 
+# process_command
+#   purp: to take the received input as a dictionary and interpret the values to do the requested action
 def process_command(data):
+    # status is what you want to do to the webpage (i.e. get/set)
+    # io_type is input/output type (i.e. sensor type, motor type, button type, led, etc.)
+    # units, where applicable, is what unit you want a 'get' request value back in
+    # value parameter is used for set only
     status = data['status']
     io_type = data['io_type']
     
-    result = "Not found"
-    if status == 'get':
+    result = "Not found"  
+    # default value of the result of a POST request is "Not found"; if calling an status/io_type that doesn't exist, returns this value
+    if status == 'get':  # a POST request containing a 'get' request means that the device wants info from a brick input device or sensor
         if io_type == 'touch':
             result = get_touch(data['port'], data['settings'])
         elif io_type == 'ultrasonic':
@@ -68,7 +75,7 @@ def process_command(data):
             result = get_motor(data['io_type'], data['port'], data['settings'])
         elif io_type == 'nav button':
             result = get_button(data['settings'])
-    if status == 'set':
+    if status == 'set':  # a POST request containing a 'set' request means that the device wants to activate/change an output brick device
         if io_type == 'large motor' or io_type == 'medium motor':
             result = set_motor(data['io_type'], data['port'], data['settings'])
         elif io_type == 'sound':
