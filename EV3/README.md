@@ -135,11 +135,11 @@ If you want to add anything, such as the ability to edit the screen's image whil
 you will have to write the wrapper functions yourself. I suggest adding them to the already existing functions in appJSON.py (under
 EventServer) and updating the file. However most, if not all, basic wrapper functions are already written for you.
 
-Check out FunctionList.txt for a basic (incomplete) list of functions you can call and what to pass in, as well as for links to helpful resources. If there is something you need that is missing, bring it up as an issue and I can add it.
+Check out FunctionList.md for a basic (incomplete) list of functions you can call and what to pass in, as well as for links to helpful resources. If there is something you need that is missing, bring it up as an issue and I can add it.
 
 Looking to set up a web server?
 --------------
-Check out SettingUpWebServer.txt for a guide to set up a flask (python) web server on your EV3. 
+Check out SettingUpWebServer.md for a guide to set up a flask (python) web server on your EV3. 
 
 This project is funded by the LEGO Education division of the LEGO Group.
 --------------
