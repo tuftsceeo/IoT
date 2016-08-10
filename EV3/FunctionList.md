@@ -1,4 +1,4 @@
-FunctionList.txt
+FunctionList
 
 Large/Medium Motor
 --------------
