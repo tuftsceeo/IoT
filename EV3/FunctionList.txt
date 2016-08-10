@@ -1,17 +1,25 @@
 FunctionList.txt
 
-~Large/Medium Motor~
+Large/Medium Motor
+--------------
 
-~Touch Sensor~
+Touch Sensor
+--------------
 
-~Ultrasonic Sensor~
+Ultrasonic Sensor
+--------------
 
-~Color/Light Sensor~
+Color/Light Sensor
+--------------
 
-~Gryo Sensor~
+Gryo Sensor
+--------------
 
-~LED~
+LED
+--------------
 
-~Brick Buttons~
+Brick Buttons
+--------------
 
-~Sound~
+Sound
+--------------
