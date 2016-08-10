@@ -167,10 +167,16 @@ def set_buzzer(port, settings):
 # purp: to switch voltages and currents
 def set_relay(port, settings):
         try:
-                if settings['relay_mode'] == 'switch':
+                if settings['relay_mode'] == 'on':
                         grovepi.digitalWrite(port, 1)
-                elif settings['relay_mode'] == 'stay':
+                elif settings['relay_mode'] == 'off':
                         grovepi.digitalWrite(port, 0)
+                elif settings['relay_mode'] == 'switch':
+                        state = grovepi.digitalRead(port)
+                        if state == 1:
+                                grovepi.digitalWrite(port, 0)
+                        elif state == 0:
+                                grovepi.digitalWrite(port, 1)
         except ValueError:
                 return "Not found"
 
