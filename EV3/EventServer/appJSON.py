@@ -210,7 +210,7 @@ def set_motor(io_type, port, settings):
         if settings['motor_mode'] == 'reset':  # should reset motor encoders, aka I believe changes the position to 0, stops motors
             i.reset()
         if settings['motor_mode'] == 'switch':
-            i.duty_cycle_sp(i.duty_cycle_sp = i.duty_cycle_sp * -1)
+            i.duty_cycle_sp = i.duty_cycle_sp * -1
         return "successful set"
     except ValueError:
         return "Not found"
