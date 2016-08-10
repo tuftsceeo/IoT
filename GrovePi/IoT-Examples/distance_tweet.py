@@ -1,15 +1,14 @@
-# button_tweet.py
-# Purpose: to tweet whethe current distance between the ultrasonic sensor 
+# distance_tweet.py
+# Purpose: to tweet the current distance between the ultrasonic sensor 
 #          and the closest object when the button is pressed
-# Date: August 9thOB, 2016
+# Date: August 9th, 2016
 # By: Bianca capretta
 # used python twitter tutorial for assistance: nodotcom.org/python-twitter-tutorial.html
 
 from setuptools import setup
 import tweepy
-import time
+import time, math
 import grovepi
-import math
 
 # connections
 ultrasonic_ranger = 4
