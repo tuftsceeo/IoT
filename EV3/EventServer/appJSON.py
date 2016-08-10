@@ -3,6 +3,8 @@
 #       uses wrapper functions to call ev3dev functions on linux system
 #   created by: Juliana Furgala
 #   last edited on: August 3, 2016 for updating comments
+#   notes: I highly suspect my 'try, except' lines in my wrapper (get and set) functions are really working; I recommend fixing those.
+#       It should be minor. It might be I'm throwing the wrong error. 
 
 # tutorial for set-up found here: https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
 #   note: This tutorial works for any device that you can code in python on, not just a Raspberry Pi. 
@@ -13,7 +15,7 @@ from ev3dev import *
 import ev3dev.ev3 as ev3
 import logging, time
 from ev3dev.auto import list_motors
-# to use: uncomment the below line; then uncomment line 84 under 'io_type == twitter' and comment out the line below that
+# to use: uncomment the below line; then uncomment line 90 under 'io_type == twitter' and comment out the line below that
 # It's commented out because it doesn't work that well with the EV3; it's VERY slow (think 2-4 minute 'loading' lag for any program if
 # it's commented in). BUT it does work. Maybe change it to Twython to improve that; but you'd have to change the tweepy function.
 # import tweepy
@@ -118,7 +120,8 @@ def get_ultrasonic(port, settings):
 #       has ambient, reflected, color recognition modes, etc.
 def get_color(port, settings):
     try:
-        #if settings['data_format'] == 'raw':
+        # if settings['data_format'] == 'raw':  # not currently used but if you implement another 'data format' (like 'count', # of times color seen) would want
+        # set the mode and then get the value of the color sensor under that mode
         if settings['color_mode'] == 'reflected':
             ev3.ColorSensor(port).modes("COL_REFLECTED")
         if settings['color_mode'] == 'ambient':
@@ -140,14 +143,15 @@ def get_motor(io_type, port, settings):
         elif io_type == 'medium motor':
             i = ev3.MediumMotor(port)
 
-        if settings['motor_mode'] == 'position':
+        if settings['motor_mode'] == 'position':  # position is the motors current distance from its starting point (when plugged in)
             if settings['units'] == 'rotations':
                 return i.position/i.count_per_rot
             elif settings['units'] == 'degrees':
                 return i.position
-        if settings['motor_mode'] == 'duty_cycle':
+        # duty cycle is the tachomotor motor's percentage of power; can be varied to generate constant speed; value range = -100 to 100
+        if settings['motor_mode'] == 'duty_cycle':  
             return i.duty_cycle
-        if settings['motor_mode'] == 'speed':
+        if settings['motor_mode'] == 'speed':  # value range = -1000 to 1000
             return i.speed
     except ValueError:
         return "Not found"
@@ -161,7 +165,7 @@ def get_button(settings):
         button_chosen = settings['button']
         if settings['touch_mode'] == 'raw_touch':
             if button_chosen == 'up':
-                return 1 if button.up else 0
+                return 1 if button.up else 0  # by default these button.direction statements return 'True' or 'False'
             elif button_chosen == 'down':
                 return 1 if button.down else 0
             elif button_chosen == 'left':
@@ -172,11 +176,12 @@ def get_button(settings):
                 return 1 if button.enter else 0
             elif button_chosen == 'backspace':
                 return 1 if button.backspace else 0
-#        if settings['touch_mode'] == 'list':
-            # elif button_chosen == '':
+            # elif button_chosen == '':  # if blank string passed in; return list of all buttons currently pressed
             #     return button.buttons_pressed
-            else:
-                return 1 if button.check_buttons(buttons=[button_chosen]) else 0
+            else:  # default case allows any number of buttons to be passed in, a list; checks to see if they're all pressed; can be none, 1 button, up to all buttons
+                # this doesn't work yet because if it is a list, errors will be caused by trying to access one button above; 
+                # can be fixed to check if it's a list or a string; the string checks are the single buttons above, lists go here
+                return 1 if button.check_buttons(buttons=[button_chosen]) else 0  
             return "successful set"
     except ValueError:
         return "Not found"
@@ -193,16 +198,19 @@ def set_motor(io_type, port, settings):
         power = int(settings['power'])
         if settings['motor_mode'] == 'run forever':
             i.run_forever(duty_cycle_sp=power)
-            time.wait(1)
-        # if info == 'run_timed':
-        #    i.run_timed(time_sp=timer, duty_cycle_sp=power)
+            time.wait(1)  # this will cause server 500 errors when you call run forever because time.wait doesn't exist
+            # BUT this must be here because it allows run forever to work as it sets off to find something it can't; otherwise the motor just twitches
+            # Two threads should be made so the EV3 can still process new input; it just keeps the motor running
+        if settings['motor_mode'] == 'run timed':
+            time_picked = settings['time']
+            i.run_timed(time_sp=time_picked, duty_cycle_sp=power)  # might also need the time.wait fix; didn't test
         if settings['motor_mode'] == 'stop':
             stop_type = settings['stop_type']
             i.stop()
-        if settings['motor_mode'] == 'reset':
+        if settings['motor_mode'] == 'reset':  # should reset motor encoders, aka I believe changes the position to 0, stops motors
             i.reset()
         if settings['motor_mode'] == 'switch':
-            i.duty_cycle_sp(i.duty_cycle_sp * -1)
+            i.duty_cycle_sp(i.duty_cycle_sp = i.duty_cycle_sp * -1)
         return "successful set"
     except ValueError:
         return "Not found"
