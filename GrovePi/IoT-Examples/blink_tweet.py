@@ -1,4 +1,4 @@
-# TweetBlinky.py
+# blink_tweet.py
 # Purpose: to flash an LED whenever a tweet in the world is posted with '#yes';
 #          shows how the virtual world can affect the physical world
 # By: Bianca Capretta
