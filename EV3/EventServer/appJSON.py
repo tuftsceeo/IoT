@@ -350,4 +350,4 @@ def internal_server_error(error):
     return ('{httpCode: %s}', error)
     
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')  # debug True allows you to catch errors and debug problems in your server; 0.0.0.0 makes the site publically accessable
