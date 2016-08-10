@@ -91,9 +91,9 @@ def get_led(port, settings):
 def get_rotary_angle_sensor(port, settings):
         try:
                 if settings['angle_mode'] == 'raw_angle':
-                        if settings['type'] == 'analog':
+                        if settings['units'] == 'analog':
                                 return grovepi.analogRead(port)
-                        elif settings['type'] == 'degrees':
+                        elif settings['units'] == 'degrees':
                                 sensor_value = grovepi.analogRead(port)
                                 voltage = round((float)(sensor_value)*5/1023, 2)
                                 degrees = round((voltage*300)/5, 2) # 300 is the full value of the rotary angle
@@ -106,9 +106,9 @@ def get_rotary_angle_sensor(port, settings):
 def get_sound(port, settings):
         try:
                 if settings['sound_mode'] == 'raw_volume':
-                        if settings['type'] == 'voltage':
+                        if settings['units'] == 'voltage':
                                 return (grovepi.analogRead(port)/1024) * 5
-                        elif settings['type'] == 'analog':
+                        elif settings['units'] == 'analog':
                                 return grovepi.analogRead(port)
         except ValueError:
                 return "Not found"
@@ -117,9 +117,9 @@ def get_sound(port, settings):
 def get_temperature(port, settings):
         try:
                 if settings['temp_mode'] == 'raw_temp':
-                        if settings['type'] == 'celsius':
+                        if settings['units'] == 'celsius':
                                 return grovepi.dht(port, 1)
-                        elif settings['type'] == 'fahrenheit':
+                        elif settings['units'] == 'fahrenheit':
                                 return (grovepi.dht(port, 1)*1.8) + 32
         except ValueError:
                 return "Not found"
@@ -136,9 +136,9 @@ def get_light_sensor(port, settings):
 def get_ultrasonic(port, settings):
         try:
                 if settings['ultrasonic_mode'] == 'distance':
-                        if settings['type'] == 'cm':
+                        if settings['units'] == 'cm':
                                 return grovepi.ultrasonicRead(port)
-                        elif settings['type'] == 'in':
+                        elif settings['units'] == 'in':
                                 return grovepi.ultrasonicRead(port) * 0.393701
         except ValueError:
                 return "Not found"
