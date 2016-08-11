@@ -3,31 +3,31 @@ FunctionList
 
 Large/Medium Motor
 --------------
-~ get_motor ~ can return  
+'get_motor' can return  
 - position (in rotations or degrees)  
 - duty_cycle (read about tachometer motors; power)  
 - speed  
 
-~ set_motor ~ can change  
-- run_forever (Will cause an error but is okay)  
-- run_timed ()  
+'set_motor' can change  
+- run_forever (Will cause an error but is okay; still works; see ProblemAssistance.txt for details)  
+- run_timed (time in ms)  
 - stop  
-- reset  
-- switch  
+- reset (should stop motor and reset encoder - aka set position to 0)  
+- switch (should reverse direction of motor; right now only stops the motor which it shouldn't; is calling stop for some weird reason)  
 
 Touch Sensor
 --------------
-~ get_touch ~ can return  
+'get_touch' can return  
 - raw_touch (aka touch sensor value)  
 
 Ultrasonic Sensor
 --------------
-~ get_ultrasonic ~ can return  
+'get_ultrasonic' can return  
 - distance (in cm and in)  
 
 Color/Light Sensor
 --------------
-~ get_color ~ can return  
+'get_color' can return  
 - reflected  
 - ambient  
 - color  
@@ -42,7 +42,7 @@ LED
 
 Brick Buttons
 --------------
-~ get_button ~ can return  
+'get_button' can return  
 - raw_touch (aka whether a brick button is pressed; for left, right, up, down, enter and backspace)  
 
 Sound
