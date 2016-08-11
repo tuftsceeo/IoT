@@ -136,7 +136,7 @@ of the functions for all EV3 sensors and motors.
 
 If you want to use wrapper functions rather than learning to use the ev3dev functions (A project Ethan wanted for the future), or
 if you want to see how to call many of these functions in Python, you can check out the wrapper functions in EV3JSON.py in the Event
-Server file, where I have a fairly comprehensive set of wrapper functions for most sensor and motor abilities. 
+Server file, where I have a fairly comprehensive set of wrapper functions for most sensor and motor capabilities. 
 
 You'll see there that while some things you would call are functions, others are values you can or will likely want to update, so if
 you get an object error, it's a value you have to set, not a function you can call.
