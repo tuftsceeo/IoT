@@ -109,7 +109,7 @@ def get_ultrasonic(port, settings):
         if settings['us_mode'] == 'distance':
             if settings['units'] == 'cm':  # convert from mm to cm
                 return ev3.UltrasonicSensor(port).value()*0.1
-            if settings['units'] == 'in':  # convert from mm to in (mm -> cm -> in)
+            elif settings['units'] == 'in':  # convert from mm to in (mm -> cm -> in)
                 return ev3.UltrasonicSensor(port).value()*0.1*0.393701
     except ValueError:
         return "Not found"
@@ -124,9 +124,9 @@ def get_color(port, settings):
         # set the mode and then get the value of the color sensor under that mode
         if settings['color_mode'] == 'reflected':
             ev3.ColorSensor(port).modes("COL_REFLECTED")
-        if settings['color_mode'] == 'ambient':
+        elif settings['color_mode'] == 'ambient':
             ev3.ColorSensor(port).modes("COL_AMBIENT")
-        if settings['color_mode'] == 'color':
+        elif settings['color_mode'] == 'color':
             ev3.ColorSensor(port).modes("COL_COLOR")
 
         return ev3.ColorSensor(port).value()
@@ -149,9 +149,9 @@ def get_motor(io_type, port, settings):
             elif settings['units'] == 'degrees':
                 return i.position
         # duty cycle is the tachomotor motor's percentage of power; can be varied to generate constant speed; value range = -100 to 100
-        if settings['motor_mode'] == 'duty_cycle':  
+        elif settings['motor_mode'] == 'duty_cycle':  
             return i.duty_cycle
-        if settings['motor_mode'] == 'speed':  # value range = -1000 to 1000
+        elif settings['motor_mode'] == 'speed':  # value range = -1000 to 1000
             return i.speed
     except ValueError:
         return "Not found"
@@ -200,16 +200,16 @@ def set_motor(io_type, port, settings):
             i.run_forever(duty_cycle_sp=power)
             time.wait(1)  # this will cause server 500 errors when you call run forever because time.wait doesn't exist
             # BUT this must be here because it allows run forever to work as it sets off to find something it can't; otherwise the motor just twitches
-            # Two threads should be made so the EV3 can still process new input; it just keeps the motor running
-        if settings['motor_mode'] == 'run timed':
+            # I believe this creates a new thread which is why the EV3 can still process new input; it just keeps the motor running
+        elif settings['motor_mode'] == 'run timed':
             time_picked = settings['time']
             i.run_timed(time_sp=time_picked, duty_cycle_sp=power)  # might also need the time.wait fix; didn't test
-        if settings['motor_mode'] == 'stop':
+        elif settings['motor_mode'] == 'stop':
             stop_type = settings['stop_type']
             i.stop()
-        if settings['motor_mode'] == 'reset':  # should reset motor encoders, aka I believe changes the position to 0, stops motors
+        elif settings['motor_mode'] == 'reset':  # should reset motor encoders, aka I believe changes the position to 0, stops motors
             i.reset()
-        if settings['motor_mode'] == 'switch':
+        elif settings['motor_mode'] == 'switch':
             i.duty_cycle_sp = i.duty_cycle_sp * -1
         return "successful set"
     except ValueError:
@@ -224,17 +224,22 @@ def set_sound(settings):
             frequency = settings['frequency']
             duration = settings['duration']
             ev3.Sound.tone([(frequency, duration, 1)])  # 1 ms delay between tones
-        if settings['sound_mode'] == 'note':
+        elif settings['sound_mode'] == 'note':
             duration = settings['duration']
             note = settings['note']
             octave = settings['octave']
             
-        if settings['sound_mode'] == 'file':
+        elif settings['sound_mode'] == 'file':
             filename = settings['filename']
             ev3.Sound.play(filename)
-        if settings['sound_mode'] == 'speech':
+        elif settings['sound_mode'] == 'speech':
             message = settings['message']
             ev3.Sound.speak(message)
+        elif settings['sound_mode'] == 'song':
+            # caution: everything sounds like a guitar solo
+            song_array = settings['song_array']
+            for item in song_array:
+                ev3.Sound.tone(song_array)
         return "successful set"
     except ValueError:
         return "Not found"
@@ -350,4 +355,4 @@ def internal_server_error(error):
     return ('{httpCode: %s}', error)
     
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')  # debug True allows you to catch errors and debug problems in your server; 0.0.0.0 makes the site publically accessable
+    app.run(debug=True, host='0.0.0.0')
