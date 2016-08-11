@@ -1,0 +1,21 @@
+○ , ● , ◐ , ◑ , ◒ , ◓ , ◔ , ◕ , ☑ - Completion circles
+
+For Summer 2016 goals see the EV3 folder for its version of this file.
+
+Summer goals
+1. 
+2.
+3.
+4.
+
+
+Long-Term IoT Goals
+ - Make a web interface that people can use to select options (which creates a program for you) and which sends it automatically to your
+ EV3/device (goal = user friendly, no SSH knowledge required)
+ 
+ - Make a python back-end for ev3dev system so people can program directly in python and have it 'translated' to ev3dev functions, 
+ variables, etc.; Use wrapper functions, perhaps modified, from EV3JSON.py in the EventServer file.
+ 
+ - Remove SSHing and the terminal from user view
+ 
+ - Digital daisy-chain of EV3s
