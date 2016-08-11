@@ -1,8 +1,8 @@
 FunctionList
   purp: shows each input and output object's get and set functions and options for EV3JSON.py  
   
-EV3JSON.py runs a flask (Python) server that takes in POST and GET requests. When it takes a POST request, it expects a JSON string  
-with commands that it makes into a dictionary to be processed. The same format can be seen below:  
+EV3JSON.py runs a flask (Python) server that takes in POST and GET requests. When it takes a POST request, it expects a  
+JSON string with commands that it makes into a dictionary to be processed. The same format can be seen below:  
 
 
 
