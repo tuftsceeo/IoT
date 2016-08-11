@@ -87,7 +87,7 @@ def process_command(data):
         elif io_type == 'stop all':
             result = stop_all()
         elif io_type == 'twitter':
-            # result = set_twitter_post(data['port'], data['settings'])
+            # result = set_twitter(data['port'], data['settings'])
             result = 'theoretically sending a tweet'
     return result
 
@@ -224,18 +224,18 @@ def set_sound(settings):
             frequency = settings['frequency']
             duration = settings['duration']
             ev3.Sound.tone([(frequency, duration, 1)])  # 1 ms delay between tones
-        elif settings['sound_mode'] == 'note':
+        elif settings['sound_mode'] == 'note':  # NOT IMPLEMENTED
             duration = settings['duration']
             note = settings['note']
             octave = settings['octave']
             
-        elif settings['sound_mode'] == 'file':
+        elif settings['sound_mode'] == 'file':  # file must be on brick
             filename = settings['filename']
             ev3.Sound.play(filename)
-        elif settings['sound_mode'] == 'speech':
+        elif settings['sound_mode'] == 'speech':  # text to speech
             message = settings['message']
             ev3.Sound.speak(message)
-        elif settings['sound_mode'] == 'song':
+        elif settings['sound_mode'] == 'song':  # takes an array of tones
             # caution: everything sounds like a guitar solo
             song_array = settings['song_array']
             for item in song_array:
@@ -247,7 +247,7 @@ def set_sound(settings):
 
 # set_led
 #   purp: to set the colors of the LEDs behind the brick buttons;
-#       mode (which side) = left, right, both
+#       brick_lights field (which side) = left, right, both
 def set_led(settings):
     try:
         if settings['led_mode'] == 'on':
@@ -275,11 +275,11 @@ def set_led(settings):
                 set_led({"led_mode":settings['led_mode'], "color":settings['color'], "brick_lights":"right"})
             
         elif settings['led_mode'] == 'off':
-            if mode == 'left':
+            if settings['brick_lights'] == 'left':
                 ev3.Leds.off(ev3.Leds.LEFT)
-            if mode == 'right':
+            if settings['brick_lights'] == 'right':
                 ev3.Leds.off(ev3.Leds.RIGHT)
-            if mode == 'both':
+            if settings['brick_lights'] == 'both':
                 ev3.Leds.all_off()
         return "successful set"
     except ValueError:
@@ -289,17 +289,17 @@ def set_led(settings):
 def stop_all():
     try:
         # credit for the following two lines goes to dwalton76 : https://github.com/rhempel/ev3dev-lang-python/blob/develop/utils/stop_all_motors.py
-        for motor in list_motors():
+        for motor in list_motors():  # works for all motors, large and medium
             motor.stop(stop_action="coast")
                                             
     except ValueError:
         return "Not found"
 
 
-# set_twitter_post
+# set_twitter
     #  information for this demo function and code outline came from an online tutorial at:
     # nodotcom.org/python-twitter-tutorial.html
-def set_twitter_post(port, settings):
+def set_twitter(port, settings):
     try:
         
         def get_api(cfg):
