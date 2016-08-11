@@ -1,5 +1,29 @@
-Grove Pi Documentation
+Grove Pi
 ----------------------
+**What is the GrovePi?**
+- Add-on to the Raspberry Pi
+- Over 100+ sensors
+        - Ex: button, buzzer, ultrasonic sensor, rotary angle sensor, etc 
+- Collects information from the outside environment 
+        - Temperature, humidity, sound levels, light intensity, etc
+- Easy to program in python 
+        - Advertised as a Plug-n-Play product from dexter -> easy for kids to use
+
+**What have I been working on with the GrovePi?**
+- Attempting to parallel what Juliana did on the Ev3 on the GrovePi: https://github.com/CEEO-DrEsLab/IoT/tree/master/EV3
+- Worked on introducing sensors to the Internet (ex: Twitter) and giving physical devices an online presence
+
+**What does it prove? Why is it relevant and useful?**
+- Sensors get info from environment and can put that info onto the Internet
+- We’ve been able to indirectly prove that you can make the GrovePi communicate with the EV3
+        - If the GrovePi sensors could connect to another device, it could provide a plethora of new inputs to that device
+        - Adds a wealth of information in Sensors
+- Augments the abilities of a Raspberry Pi
+        - Raspberry Pi already can connect to internet; but with the GrovePi attached, the Raspberry Pi gets all of this information about the physical world from the sensors. 
+- Users are no longer limited to just the sensors in their kit
+
+Documentation
+------------------
 
 **Materials:**
 - GrovePi Base Kit
