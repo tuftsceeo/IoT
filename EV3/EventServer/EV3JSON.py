@@ -1,4 +1,4 @@
-# appJSON.py
+# EV3JSON.py
 #   purp: to accept JSON strings from an input and interpret get and set requests;
 #       uses wrapper functions to call ev3dev functions on linux system
 #   created by: Juliana Furgala
