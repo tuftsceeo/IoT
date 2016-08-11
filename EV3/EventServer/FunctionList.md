@@ -2,10 +2,26 @@ FunctionList
   purp: shows each input and output object's get and set functions and options for EV3JSON.py  
   
 EV3JSON.py runs a flask (Python) server that takes in POST and GET requests. When it takes a POST request, it expects a  
-JSON string with commands that it makes into a dictionary to be processed. The same format can be seen below:  
+JSON string with commands that it makes into a dictionary to be processed. The same format can be seen below.  
 
+Some of the ev3dev functions are not very user friendly. Luckily I've made wrapper functions for most functions for all sensors and
+motors except for the gyroscopic sensor. These wrapper functions also cover LEDs, sound (limited), and brick buttons. You can find
+these functions in the EV3JSON.py file as they are used in the EventServer. You can use the Event Server and keep the format,
+which would result in a simple brick (controlled by an interface) or to get a complex (autonomous) brick, you can have the brick host
+its own interface like in the WebInterface folder. You would just need to change the parameters of the wrapper functions as they
+currently want a JSON string like this: 
 
+```{"status":"set","io_type":"large motor","port":"outA","settings":{"motor_mode":"run forever","power":25}}```
 
+This is a command that will run a large motor in Port A at a power of 25. If you send a JSON string like this to the Event Server 
+EV3 server file, then it will turn it into Python dictionary and interpret the fields to direct the command to the right get or set
+function.
+
+If you want to add anything, such as the ability to edit the screen's image while a program is running, or use a gyroscopic sensor,
+you will have to write the wrapper functions yourself. I suggest adding them to the already existing functions in appJSON.py (under
+EventServer) and updating the file. However most, if not all, basic wrapper functions are already written for you.
+
+If there is something you need that is missing, bring it up as an issue and I can add it.
 
 
 # Standard Sensors/Motors/Etc.
