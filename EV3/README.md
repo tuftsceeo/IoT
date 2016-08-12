@@ -147,5 +147,12 @@ Check out the following link for a guide to set up a flask (python) web server o
 interface with buttons, you can type commands in the terminal while ssh'ed into the EV3.
 https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/ 
 
+Searching for resources?
+--------------
+You can check out [here](https://docs.google.com/document/d/1IkEcJhH4C3PUL8MLB-D52iTWV8N_v-aHuJ1aZkMxkmA/edit?usp=sharing) a list of
+resources both that I used and that I explored but did not use to see if any of them are helpful for what you are trying to do. You
+might find that it already has what you're looking for but if it doesn't and you add a new feature or find a very important link please
+add it to this document so that future users can also benefit from this open resource. 
+
 This project is funded by the LEGO Education division of the LEGO Group.
 --------------
