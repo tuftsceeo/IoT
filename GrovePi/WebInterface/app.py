@@ -1,5 +1,5 @@
-# app2.py
-# Purpose: to control an LED through input from a web-browser       
+# app.py
+# Purpose: to control an LED through input (on/off and port) from a web-browser       
 # Date: August 4th, 2016
 # By: Bianca Capretta
 
