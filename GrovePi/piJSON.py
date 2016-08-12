@@ -1,5 +1,6 @@
 # piJSON.py
-# Purpose: to create a user-responsive, GrovePi server that can interpret user form input
+# Purpose: to accept JSON strings from an input and interpret get and set requests;
+#          uses wrapper functions to call grovepi functions
 # Date: August 10th, 2016
 # By: Bianca Capretta
 # Used tutorial for assistance: https://www.raspberrypi.org/learning/python-web-server-with-flask/worksheet/
