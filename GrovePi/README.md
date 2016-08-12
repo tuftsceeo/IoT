@@ -12,6 +12,7 @@ Grove Pi
 **What have I been working on with the GrovePi?**
 - Attempting to parallel what Juliana did on the Ev3 on the GrovePi: https://github.com/CEEO-DrEsLab/IoT/tree/master/EV3
 - Worked on introducing sensors to the Internet (ex: Twitter) and giving physical devices an online presence
+        - Examples: https://www.youtube.com/watch?v=KWlcQqoKCoU&feature=youtu.be
 
 **What does it prove? Why is it relevant and useful?**
 - Sensors get info from environment and can put that info onto the Internet
